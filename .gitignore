@@ -16,7 +16,7 @@ dist/
 .DS_Store
 Thumbs.db
 
-# Editor
-.vscode/
-.idea/
-*.swp
+# Internal docs (not for repo)
+DEPLOY.md
+SHOWCASE.md
+GIT_SETUP.md
