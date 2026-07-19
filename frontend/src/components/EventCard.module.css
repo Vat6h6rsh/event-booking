@@ -17,23 +17,33 @@
 }
 .card:hover .imgWrap img { transform: scale(1.07); }
 
-.catBadge {
-  position: absolute;
-  top: 12px; left: 12px;
+.catBadge { position: absolute; top: 12px; left: 12px; backdrop-filter: blur(6px); }
+.ageBadge {
+  position: absolute; top: 12px; right: 12px;
+  color: #fff; font-size: 0.68rem; font-weight: 900;
+  padding: 3px 8px; border-radius: var(--radius-pill);
+  letter-spacing: .06em;
+}
+.timeBadge {
+  position: absolute; bottom: 10px; left: 10px;
+  font-size: 0.72rem; font-weight: 800;
+  padding: 3px 10px; border-radius: var(--radius-pill);
   backdrop-filter: blur(6px);
 }
 .soldBadge {
-  position: absolute;
-  top: 12px; right: 12px;
-  background: #FEF2F2;
-  border: 2px solid #FCA5A5;
-  color: #DC2626;
-  font-size: 0.72rem;
-  font-weight: 800;
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
-  letter-spacing: .04em;
+  position: absolute; bottom: 10px; right: 10px;
+  background: #FEF2F2; border: 2px solid #FCA5A5;
+  color: #DC2626; font-size: 0.72rem; font-weight: 800;
+  padding: 3px 10px; border-radius: var(--radius-pill);
 }
+.lowBadge {
+  position: absolute; bottom: 10px; right: 10px;
+  background: #FFF7ED; border: 2px solid #FED7AA;
+  color: #C2410C; font-size: 0.72rem; font-weight: 800;
+  padding: 3px 10px; border-radius: var(--radius-pill);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.65} }
 
 .body {
   flex: 1;
@@ -82,13 +92,11 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.tickets {
-  font-size: 0.75rem;
-  color: var(--muted);
-  font-weight: 700;
-}
-.soldBtn {
-  background: var(--muted) !important;
-  box-shadow: none !important;
-  cursor: not-allowed;
+.tickets { font-size: 0.75rem; color: var(--muted); font-weight: 700; }
+.soldBtn { background: var(--muted) !important; box-shadow: none !important; cursor: not-allowed; }
+.tiers { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+.tierPill {
+  font-size: 0.7rem; font-weight: 700;
+  padding: 2px 9px; border-radius: var(--radius-pill);
+  border: 1.5px solid;
 }

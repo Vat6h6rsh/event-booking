@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { useApp } from '../context/AppContext'
+import { useApp, PAGES } from '../context/AppContext'
+import NotificationBell from './NotificationBell'
 import styles from './Navbar.module.css'
 
 export default function Navbar({ onExplore }) {
-  const { user, logout, setAuthOpen } = useApp()
+  const { user, logout, setAuthOpen, page, setPage, goHome } = useApp()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const navRef = useRef(null)
@@ -14,30 +15,37 @@ export default function Navbar({ onExplore }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  function nav(pg) { setPage(pg); setMenuOpen(false); window.scrollTo({ top:0, behavior:'smooth' }) }
+
   return (
     <nav ref={navRef} className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.inner}>
         {/* Logo */}
-        <a href="#" className={styles.logo} onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+        <button className={styles.logo} onClick={goHome}>
           <span className={styles.logoIcon}>🎟️</span>
           <span className={styles.logoText}>Jtickets</span>
-        </a>
+        </button>
 
-        {/* Nav links (desktop) */}
+        {/* Desktop nav links */}
         <ul className={styles.links}>
-          <li><a href="#events" onClick={onExplore}>Events</a></li>
-          <li><a href="#how">How it works</a></li>
-          {user?.role === 'customer' && <li><a href="#events">My Bookings</a></li>}
+          <li><button onClick={() => { goHome(); setTimeout(onExplore, 100) }}>Events</button></li>
+          {user?.role === 'organizer' && (
+            <li><button onClick={() => nav(PAGES.ORGANIZER)}>Dashboard</button></li>
+          )}
         </ul>
 
-        {/* Auth area (desktop) */}
+        {/* Auth area */}
         <div className={styles.auth}>
           {user ? (
             <>
               <span className={styles.greeting}>
-                {user.role === 'organizer' ? '🎪' : '🌟'} {user.email.split('@')[0]}
+                {user.role === 'organizer' ? '🎪' : '🌟'} {user.full_name || user.email.split('@')[0]}
               </span>
-              <button className="btn btn-ghost btn-sm" onClick={logout}>Logout</button>
+              <NotificationBell />
+              {user.role === 'organizer' && (
+                <button className="btn btn-ghost btn-sm" onClick={() => nav(PAGES.ORGANIZER)}>Dashboard</button>
+              )}
+              <button className="btn btn-ghost btn-sm" onClick={logout}>Log out</button>
             </>
           ) : (
             <>
@@ -47,7 +55,7 @@ export default function Navbar({ onExplore }) {
           )}
         </div>
 
-        {/* Hamburger (mobile) */}
+        {/* Hamburger */}
         <button className={styles.hamburger} aria-label="Menu" onClick={() => setMenuOpen(!menuOpen)}>
           <span /><span /><span />
         </button>
@@ -56,10 +64,12 @@ export default function Navbar({ onExplore }) {
       {/* Mobile menu */}
       {menuOpen && (
         <div className={styles.mobileMenu}>
-          <a href="#events" onClick={() => setMenuOpen(false)}>Events</a>
-          <a href="#how" onClick={() => setMenuOpen(false)}>How it works</a>
+          <button onClick={() => { goHome(); setMenuOpen(false); setTimeout(onExplore, 100) }}>Events</button>
+          {user?.role === 'organizer' && (
+            <button onClick={() => nav(PAGES.ORGANIZER)}>Dashboard</button>
+          )}
           {user ? (
-            <button className="btn btn-ghost" onClick={() => { logout(); setMenuOpen(false) }}>Logout</button>
+            <button className="btn btn-ghost" onClick={() => { logout(); setMenuOpen(false) }}>Log out</button>
           ) : (
             <>
               <button className="btn btn-ghost" onClick={() => { setAuthOpen(true); setMenuOpen(false) }}>Log in</button>

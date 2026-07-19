@@ -18,14 +18,10 @@
   gap: 32px;
 }
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-logo);
-  font-size: 1.6rem;
-  color: var(--dark);
-  text-decoration: none;
-  flex-shrink: 0;
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-logo); font-size: 1.6rem;
+  color: var(--dark); text-decoration: none; flex-shrink: 0;
+  background: none; border: none; cursor: pointer; padding: 0;
 }
 .logoText {
   background: linear-gradient(135deg, var(--pink), var(--purple));
@@ -41,15 +37,13 @@
   list-style: none;
   flex: 1;
 }
-.links a {
-  padding: 8px 16px;
-  border-radius: var(--radius-pill);
-  font-weight: 700;
-  color: var(--dark);
-  transition: background .2s, color .2s;
-  font-size: 0.95rem;
+.links a, .links button {
+  padding: 8px 16px; border-radius: var(--radius-pill);
+  font-weight: 700; color: var(--dark);
+  transition: background .2s, color .2s; font-size: 0.95rem;
+  background: none; border: none; cursor: pointer;
 }
-.links a:hover { background: var(--pink-pale); color: var(--pink); }
+.links a:hover, .links button:hover { background: var(--pink-pale); color: var(--pink); }
 .auth {
   display: flex;
   align-items: center;

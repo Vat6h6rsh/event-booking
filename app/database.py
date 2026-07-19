@@ -11,8 +11,20 @@ DATABASE_URL = os.getenv(
     "sqlite:///./booking.db",
 )
 
+# Managed hosts (Render, Heroku, Railway) hand out `postgres://` URLs, but
+# SQLAlchemy 2.x + psycopg2 require the `postgresql://` scheme. Normalise it so a
+# copy-pasted database URL just works.
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
 # SQLite needs check_same_thread=False; PostgreSQL does not accept that kwarg.
-connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
+# `timeout` lets a request and its background-task session (separate connections)
+# wait for each other instead of failing with "database is locked".
+connect_args = (
+    {"check_same_thread": False, "timeout": 30}
+    if DATABASE_URL.startswith("sqlite")
+    else {}
+)
 
 engine = create_engine(DATABASE_URL, connect_args=connect_args)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

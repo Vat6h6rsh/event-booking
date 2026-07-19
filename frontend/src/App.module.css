@@ -1,0 +1,16 @@
+.supportFab {
+  position: fixed; bottom: 24px; right: 24px; z-index: 200;
+  width: 54px; height: 54px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), #FF6B9D);
+  color: #fff; border: none; font-size: 1.4rem;
+  box-shadow: 0 8px 24px rgba(167,139,250,.5);
+  cursor: pointer; transition: transform .2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.supportFab:hover { transform: scale(1.1); }
+
+.legalPage { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+.legalContent {
+  white-space: pre-wrap; font-family: inherit;
+  color: var(--text); line-height: 1.8; font-size: 0.9rem;
+}

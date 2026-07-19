@@ -1,31 +1,45 @@
+import { useApp, PAGES } from '../context/AppContext'
 import styles from './Footer.module.css'
 
-export default function Footer() {
+export default function Footer({ onSupport }) {
+  const { setPage, goHome } = useApp()
+
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
         {/* Brand */}
         <div className={styles.brand}>
-          <span className={styles.logo}>🎟️ Jtickets</span>
+          <button className={styles.logo} onClick={goHome}>🎟️ Jtickets</button>
           <p>Where every moment becomes magical. ✨</p>
           <div className={styles.socials}>
             {['🎵', '📸', '🐦', '💜'].map((e, i) => (
-              <a key={i} href="#" className={styles.socialBtn}>{e}</a>
+              <span key={i} className={styles.socialBtn}>{e}</span>
             ))}
           </div>
         </div>
 
-        {/* Links */}
-        {[
-          { heading: 'Explore', links: ['All Events', 'Music', 'Movies', 'Get-togethers', 'Festivals'] },
-          { heading: 'Company', links: ['About Us', 'Blog', 'Careers', 'Press'] },
-          { heading: 'Support', links: ['Help Center', 'Contact Us', 'Privacy Policy', 'Terms of Use'] },
-        ].map(({ heading, links }) => (
-          <div key={heading} className={styles.col}>
-            <h4 className={styles.colTitle}>{heading}</h4>
-            {links.map((l) => <a key={l} href="#" className={styles.link}>{l}</a>)}
-          </div>
-        ))}
+        {/* Explore */}
+        <div className={styles.col}>
+          <h4 className={styles.colTitle}>Explore</h4>
+          {['Music', 'Movies', 'Social', 'Festival'].map(c => (
+            <button key={c} className={styles.link} onClick={goHome}>{c} Events</button>
+          ))}
+        </div>
+
+        {/* Company */}
+        <div className={styles.col}>
+          <h4 className={styles.colTitle}>Platform</h4>
+          <button className={styles.link} onClick={() => setPage(PAGES.ORGANIZER)}>Organizer Dashboard</button>
+          <button className={styles.link} onClick={onSupport}>Chat with Us</button>
+        </div>
+
+        {/* Legal */}
+        <div className={styles.col}>
+          <h4 className={styles.colTitle}>Legal</h4>
+          <button className={styles.link} onClick={() => setPage(PAGES.TERMS)}>Terms of Use</button>
+          <button className={styles.link} onClick={() => setPage(PAGES.PRIVACY)}>Privacy Policy</button>
+          <button className={styles.link} onClick={onSupport}>Contact Support</button>
+        </div>
       </div>
 
       <div className={styles.bottom}>
