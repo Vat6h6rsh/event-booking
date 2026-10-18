@@ -11,9 +11,10 @@ email and event-update alerts outside the booking transaction.
 - Demo organizer: `admin@jtickets.com` / `jtickets2026` (public demo credentials).
 - Create a separate customer account to book; organizers cannot book as customers.
 
-The measured local improvement is **50 -> 200 simultaneous customers** within the chosen latency/error targets. The final run completed
-every request through a **750-customer burst**, with higher latency at larger stages. These are local single-process measurements, not
-a claim about deployed capacity.
+**Measured on the deployed API (Render free tier):** the original code dropped 96% of requests at 100 simultaneous bookings; v3
+completes all 100 (zero-drop capacity 50 -> 100, p95 < 2 s capacity 10 -> 25), limited by the instance's 0.1 CPU. **Locally**, where
+CPU is not the cap, the same change moves zero-drop capacity from **50 to 750** simultaneous bookings (p95 < 2 s: 50 -> 200). Details
+and raw results are in [Performance](#performance-baseline-diagnosis-and-improvements).
 
 ## Requirement map
 
@@ -365,17 +366,37 @@ precedence over older intermediate notes.
 
 ### Deployed (Render free tier) results
 
-**Pending measured deployment results; do not substitute local values here.** Render free compute has a shared fractional budget (0.1
-CPU, 512 MB), so lower absolute capacity and CPU-bound behavior are expected; verify the deployed bottleneck. [Render compute
-plans](https://render.com/docs/compute-plans) Warm the service and keep thresholds, client location, stages, workers and suppression
-settings consistent for before/after runs.
+Both runs hit the live API (`event-booking-nnr7.onrender.com`, Render free instance, Singapore) from the same client in India with
+the same harness flags, stages and pre-created customer accounts: the original v2 code first (commit `f9d2824`), then v3 deployed to
+the same service and database. Render's free tier is a fractional CPU (0.1 CPU, 512 MB; [Render compute
+plans](https://render.com/docs/compute-plans)), so absolute numbers are far lower than local and the limit is CPU, not the database.
 
-<!-- DEPLOYED_RESULTS -->
+Cells show **successful responses / sent; p95 milliseconds**.
 
-| Version | Largest passing burst | First degrading stage | First dropped stage | p95 / error rate | Artifact |
-|---|---|---|---|---|---|
-| Deployed baseline | Pending | Pending | Pending | Pending | Pending |
-| Deployed optimized | Pending | Pending | Pending | Pending | Pending |
+| Concurrent customers | Deployed baseline (v2) | Deployed v3 |
+|---:|---:|---:|
+| 10 | 10/10; 1452.4 | 10/10; 746.8 |
+| 25 | 25/25; 2606.7 | 25/25; 1844.5 |
+| 50 | 50/50; 4980.6 | 50/50; 3564.2 |
+| 100 | **4/100**; 10033.2 | **100/100**; 9558.4 |
+| 150 | 11/150; 10016.3 | 132/150; 10020.7 |
+| 200 | 5/200; 10013.6 | 76/200; 10293.8 |
+
+| Interpretation | Deployed baseline | Deployed v3 |
+|---|---:|---:|
+| Largest stage meeting both targets (p95 < 2 s, errors < 1%) | 10 | **25** |
+| Largest stage with zero dropped requests | 50 | **100** |
+| C=100 success rate | 4% | **100%** |
+| Peak throughput | ~9.8 req/s | ~13.7 req/s |
+| Inventory reconciles with confirmed responses | through C=50 | through C=100 |
+
+Why the deployed ceiling sits near 100-130: on a 0.1-CPU instance v3 completes roughly 13 bookings per second, and a single burst
+must finish inside the 10 s client timeout, so about 13 x 10 requests is the most one burst can complete regardless of design. The
+original code never got there: pool starvation made it collapse to 4% success at C=100 while CPU was still available. The same v3
+code reaches 750 zero-drop concurrent bookings locally, so the next deployed step is more CPU or horizontal scale (several instances
+behind the same PostgreSQL, which the outbox's `SKIP LOCKED` claims and conditional inventory updates already support), not a
+redesign. Evidence: [deployed baseline](loadtest/results/baseline-render-booking-20261018-123824.md),
+[deployed v3](loadtest/results/optimized-render-booking-20261018-130726.md), [comparison](loadtest/results/compare-render.md).
 
 ### Reproduce
 
@@ -503,8 +524,8 @@ cancellation.
 
 ## Testing and review evidence
 
-Recorded v3 verification on 2026-10-18: **60 passed** on temporary SQLite (122.21 s) and **60 passed** on PostgreSQL 16 (120.66 s),
-including concurrency tests. These are implementation-session results; transport mocks are not live mailbox tests.
+Recorded v3 verification on 2026-10-18: **61 passed** on temporary SQLite and on PostgreSQL 16, including concurrency tests and
+the organizer stats endpoint. These are implementation-session results; transport mocks are not live mailbox tests.
 
 | Suite | Coverage |
 |---|---|

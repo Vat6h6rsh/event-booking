@@ -1,0 +1,4494 @@
+{
+  "config": {
+    "base_url": "https://event-booking-nnr7.onrender.com",
+    "scenario": "booking",
+    "stages": [
+      10,
+      25,
+      50,
+      100,
+      150,
+      200
+    ],
+    "tickets": 100000,
+    "timeout": 10,
+    "label": "optimized-render",
+    "error_threshold": 0.01,
+    "p95_threshold_ms": 2000,
+    "setup_concurrency": 8,
+    "stop_on_break": false,
+    "keep_event": false
+  },
+  "started_at": "2026-10-18T07:37:26.917277+00:00",
+  "status": "complete",
+  "breaking_point": {
+    "concurrency": 50,
+    "reasons": [
+      "p95 exceeds threshold"
+    ]
+  },
+  "stages": [
+    {
+      "concurrency": 10,
+      "sent": 10,
+      "2xx": 10,
+      "409": 0,
+      "4xx_other": 0,
+      "5xx": 0,
+      "timeouts": 0,
+      "connection_errors": 0,
+      "other_errors": 0,
+      "cancelled": 0,
+      "other_http": 0,
+      "wall_seconds": 0.7492543000262231,
+      "throughput_rps": 13.346603415756187,
+      "interrupted": false,
+      "requests": [
+        {
+          "index": 0,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 629.6631000004709
+        },
+        {
+          "index": 1,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 746.7950999271125
+        },
+        {
+          "index": 2,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 739.1539999516681
+        },
+        {
+          "index": 3,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 735.3506999788806
+        },
+        {
+          "index": 4,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 525.3873999463394
+        },
+        {
+          "index": 5,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 738.4676000801846
+        },
+        {
+          "index": 6,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 522.1209999872372
+        },
+        {
+          "index": 7,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 744.2069000098854
+        },
+        {
+          "index": 8,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 724.954100092873
+        },
+        {
+          "index": 9,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 634.8897999851033
+        }
+      ],
+      "dropped": 0,
+      "error_rate": 0.0,
+      "p50_ms": 724.954100092873,
+      "p95_ms": 746.7950999271125,
+      "p99_ms": 746.7950999271125,
+      "max_ms": 746.7950999271125,
+      "inventory": {
+        "ok": true,
+        "sold": 10,
+        "available": 99990,
+        "expected_201": 10
+      }
+    },
+    {
+      "concurrency": 25,
+      "sent": 25,
+      "2xx": 25,
+      "409": 0,
+      "4xx_other": 0,
+      "5xx": 0,
+      "timeouts": 0,
+      "connection_errors": 0,
+      "other_errors": 0,
+      "cancelled": 0,
+      "other_http": 0,
+      "wall_seconds": 1.8864352999953553,
+      "throughput_rps": 13.25250858063436,
+      "interrupted": false,
+      "requests": [
+        {
+          "index": 0,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1150.518300011754
+        },
+        {
+          "index": 1,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 276.61439997609705
+        },
+        {
+          "index": 2,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1548.137899953872
+        },
+        {
+          "index": 3,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1349.4428000412881
+        },
+        {
+          "index": 4,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 942.6844000117853
+        },
+        {
+          "index": 5,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 933.3469000412151
+        },
+        {
+          "index": 6,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1844.463299959898
+        },
+        {
+          "index": 7,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 934.5553000457585
+        },
+        {
+          "index": 8,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1134.4107000622898
+        },
+        {
+          "index": 9,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1860.168999992311
+        },
+        {
+          "index": 10,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1722.913899924606
+        },
+        {
+          "index": 11,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1122.210800065659
+        },
+        {
+          "index": 12,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1822.0542999915779
+        },
+        {
+          "index": 13,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1326.140800025314
+        },
+        {
+          "index": 14,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1109.8422000650316
+        },
+        {
+          "index": 15,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1835.3891000151634
+        },
+        {
+          "index": 16,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1806.4974000444636
+        },
+        {
+          "index": 17,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1834.3469999963418
+        },
+        {
+          "index": 18,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1825.3790999297053
+        },
+        {
+          "index": 19,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1838.627599994652
+        },
+        {
+          "index": 20,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1718.1334999622777
+        },
+        {
+          "index": 21,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1694.2925999173895
+        },
+        {
+          "index": 22,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1808.2892000675201
+        },
+        {
+          "index": 23,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1799.8585000168532
+        },
+        {
+          "index": 24,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1306.4973999280483
+        }
+      ],
+      "dropped": 0,
+      "error_rate": 0.0,
+      "p50_ms": 1694.2925999173895,
+      "p95_ms": 1844.463299959898,
+      "p99_ms": 1860.168999992311,
+      "max_ms": 1860.168999992311,
+      "inventory": {
+        "ok": true,
+        "sold": 35,
+        "available": 99965,
+        "expected_201": 35
+      }
+    },
+    {
+      "concurrency": 50,
+      "sent": 50,
+      "2xx": 50,
+      "409": 0,
+      "4xx_other": 0,
+      "5xx": 0,
+      "timeouts": 0,
+      "connection_errors": 0,
+      "other_errors": 0,
+      "cancelled": 0,
+      "other_http": 0,
+      "wall_seconds": 3.6528397999936715,
+      "throughput_rps": 13.687980513157633,
+      "interrupted": false,
+      "requests": [
+        {
+          "index": 0,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2291.194000048563
+        },
+        {
+          "index": 1,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2849.207399995066
+        },
+        {
+          "index": 2,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1687.491700053215
+        },
+        {
+          "index": 3,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2837.514300015755
+        },
+        {
+          "index": 4,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 984.2561000259593
+        },
+        {
+          "index": 5,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1084.5231999410316
+        },
+        {
+          "index": 6,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1976.7059999285266
+        },
+        {
+          "index": 7,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2287.3652999987826
+        },
+        {
+          "index": 8,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1968.4189000399783
+        },
+        {
+          "index": 9,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1975.8305000141263
+        },
+        {
+          "index": 10,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2824.0652999375015
+        },
+        {
+          "index": 11,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2474.2367999861017
+        },
+        {
+          "index": 12,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3078.428199980408
+        },
+        {
+          "index": 13,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1763.2167000556365
+        },
+        {
+          "index": 14,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1878.5167000023648
+        },
+        {
+          "index": 15,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2464.6367999957874
+        },
+        {
+          "index": 16,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1566.2927000084892
+        },
+        {
+          "index": 17,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1663.02119998727
+        },
+        {
+          "index": 18,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2975.3710000077263
+        },
+        {
+          "index": 19,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3357.617300003767
+        },
+        {
+          "index": 20,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3052.532500005327
+        },
+        {
+          "index": 21,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2255.535600008443
+        },
+        {
+          "index": 22,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3464.948399923742
+        },
+        {
+          "index": 23,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3445.532799931243
+        },
+        {
+          "index": 24,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3412.382800015621
+        },
+        {
+          "index": 25,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3408.59480004292
+        },
+        {
+          "index": 26,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3351.6658999724314
+        },
+        {
+          "index": 27,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2439.2220999579877
+        },
+        {
+          "index": 28,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3043.2982000056654
+        },
+        {
+          "index": 29,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2782.6141000259668
+        },
+        {
+          "index": 30,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2439.498299965635
+        },
+        {
+          "index": 31,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3587.0596000459045
+        },
+        {
+          "index": 32,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3355.697499937378
+        },
+        {
+          "index": 33,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2243.845400051214
+        },
+        {
+          "index": 34,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2947.242899914272
+        },
+        {
+          "index": 35,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3564.1977000050247
+        },
+        {
+          "index": 36,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2226.9691999536008
+        },
+        {
+          "index": 37,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3338.9544000383466
+        },
+        {
+          "index": 38,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3446.4033999247476
+        },
+        {
+          "index": 39,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3327.712199999951
+        },
+        {
+          "index": 40,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3561.290099984035
+        },
+        {
+          "index": 41,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3566.8026000494137
+        },
+        {
+          "index": 42,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2819.1968000028282
+        },
+        {
+          "index": 43,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2938.5818999726325
+        },
+        {
+          "index": 44,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3410.252899979241
+        },
+        {
+          "index": 45,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3427.8518999926746
+        },
+        {
+          "index": 46,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2799.91770000197
+        },
+        {
+          "index": 47,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3406.876699998975
+        },
+        {
+          "index": 48,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3551.6330000245944
+        },
+        {
+          "index": 49,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3523.1290999799967
+        }
+      ],
+      "dropped": 0,
+      "error_rate": 0.0,
+      "p50_ms": 2849.207399995066,
+      "p95_ms": 3564.1977000050247,
+      "p99_ms": 3587.0596000459045,
+      "max_ms": 3587.0596000459045,
+      "inventory": {
+        "ok": true,
+        "sold": 85,
+        "available": 99915,
+        "expected_201": 85
+      }
+    },
+    {
+      "concurrency": 100,
+      "sent": 100,
+      "2xx": 100,
+      "409": 0,
+      "4xx_other": 0,
+      "5xx": 0,
+      "timeouts": 0,
+      "connection_errors": 0,
+      "other_errors": 0,
+      "cancelled": 0,
+      "other_http": 0,
+      "wall_seconds": 9.951557799940929,
+      "throughput_rps": 10.048678007034596,
+      "interrupted": false,
+      "requests": [
+        {
+          "index": 0,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8952.324900077656
+        },
+        {
+          "index": 1,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 906.9795999675989
+        },
+        {
+          "index": 2,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 905.4034999571741
+        },
+        {
+          "index": 3,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2340.4410000657663
+        },
+        {
+          "index": 4,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2849.668600014411
+        },
+        {
+          "index": 5,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1930.8782999869436
+        },
+        {
+          "index": 6,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3662.7684000413865
+        },
+        {
+          "index": 7,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3655.5292000994086
+        },
+        {
+          "index": 8,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3141.0904000513256
+        },
+        {
+          "index": 9,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3434.459300013259
+        },
+        {
+          "index": 10,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3332.479799981229
+        },
+        {
+          "index": 11,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2037.6820000819862
+        },
+        {
+          "index": 12,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3928.5745000233874
+        },
+        {
+          "index": 13,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3920.6045999890193
+        },
+        {
+          "index": 14,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 920.5478999065235
+        },
+        {
+          "index": 15,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 906.2036999966949
+        },
+        {
+          "index": 16,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2410.9226999571547
+        },
+        {
+          "index": 17,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3015.7422999618575
+        },
+        {
+          "index": 18,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2820.2034001005813
+        },
+        {
+          "index": 19,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 909.3158999457955
+        },
+        {
+          "index": 20,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3115.0146999862045
+        },
+        {
+          "index": 21,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2303.1964999390766
+        },
+        {
+          "index": 22,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1902.5443000718951
+        },
+        {
+          "index": 23,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2500.796400010586
+        },
+        {
+          "index": 24,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2385.098300059326
+        },
+        {
+          "index": 25,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2593.1494999676943
+        },
+        {
+          "index": 26,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2688.637499930337
+        },
+        {
+          "index": 27,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2595.148399937898
+        },
+        {
+          "index": 28,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1886.0458000563085
+        },
+        {
+          "index": 29,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2084.6959999762475
+        },
+        {
+          "index": 30,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3399.3405000073835
+        },
+        {
+          "index": 31,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2385.3587000630796
+        },
+        {
+          "index": 32,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2985.0923999911174
+        },
+        {
+          "index": 33,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3583.4518000483513
+        },
+        {
+          "index": 34,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2570.380499935709
+        },
+        {
+          "index": 35,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3592.105299932882
+        },
+        {
+          "index": 36,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3888.2494000717998
+        },
+        {
+          "index": 37,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3364.356299978681
+        },
+        {
+          "index": 38,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1870.2567999716848
+        },
+        {
+          "index": 39,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9075.683999923058
+        },
+        {
+          "index": 40,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3267.902999999933
+        },
+        {
+          "index": 41,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3261.004799976945
+        },
+        {
+          "index": 42,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2958.6645000381395
+        },
+        {
+          "index": 43,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3869.6686999173835
+        },
+        {
+          "index": 44,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4262.03920005355
+        },
+        {
+          "index": 45,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9653.994799940847
+        },
+        {
+          "index": 46,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3565.284700016491
+        },
+        {
+          "index": 47,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4854.10909994971
+        },
+        {
+          "index": 48,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6157.396199996583
+        },
+        {
+          "index": 49,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4257.6435001101345
+        },
+        {
+          "index": 50,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9558.445799979381
+        },
+        {
+          "index": 51,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8368.269900092855
+        },
+        {
+          "index": 52,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9153.825500048697
+        },
+        {
+          "index": 53,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8469.911599997431
+        },
+        {
+          "index": 54,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9739.784099976532
+        },
+        {
+          "index": 55,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4135.437700082548
+        },
+        {
+          "index": 56,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9449.448300059885
+        },
+        {
+          "index": 57,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8452.185499947518
+        },
+        {
+          "index": 58,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4748.125499929301
+        },
+        {
+          "index": 59,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8349.991700029932
+        },
+        {
+          "index": 60,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8443.719299975783
+        },
+        {
+          "index": 61,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3525.8111000293866
+        },
+        {
+          "index": 62,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9432.86669999361
+        },
+        {
+          "index": 63,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8138.4825999848545
+        },
+        {
+          "index": 64,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5829.725700081326
+        },
+        {
+          "index": 65,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3422.9016000172123
+        },
+        {
+          "index": 66,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7223.69700006675
+        },
+        {
+          "index": 67,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4313.916600076482
+        },
+        {
+          "index": 68,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9618.354300037026
+        },
+        {
+          "index": 69,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9008.817100082524
+        },
+        {
+          "index": 70,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8531.111299991608
+        },
+        {
+          "index": 71,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8409.241400077008
+        },
+        {
+          "index": 72,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9227.407100028358
+        },
+        {
+          "index": 73,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6322.8924999712035
+        },
+        {
+          "index": 74,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8319.393699988723
+        },
+        {
+          "index": 75,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8420.549100032076
+        },
+        {
+          "index": 76,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8407.20939997118
+        },
+        {
+          "index": 77,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8903.78499997314
+        },
+        {
+          "index": 78,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9794.273500097916
+        },
+        {
+          "index": 79,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8318.936499999836
+        },
+        {
+          "index": 80,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7901.459900080226
+        },
+        {
+          "index": 81,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8592.837000032887
+        },
+        {
+          "index": 82,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7293.1949000339955
+        },
+        {
+          "index": 83,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4980.472400086001
+        },
+        {
+          "index": 84,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5389.5956999622285
+        },
+        {
+          "index": 85,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7497.592200059444
+        },
+        {
+          "index": 86,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8307.100800098851
+        },
+        {
+          "index": 87,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7991.882700007409
+        },
+        {
+          "index": 88,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9581.250500050373
+        },
+        {
+          "index": 89,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8178.713100031018
+        },
+        {
+          "index": 90,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4968.088800087571
+        },
+        {
+          "index": 91,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6566.881699953228
+        },
+        {
+          "index": 92,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8068.636999931186
+        },
+        {
+          "index": 93,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8293.753299978562
+        },
+        {
+          "index": 94,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8166.611699969508
+        },
+        {
+          "index": 95,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6362.72309999913
+        },
+        {
+          "index": 96,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5446.5097999200225
+        },
+        {
+          "index": 97,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9452.861300087534
+        },
+        {
+          "index": 98,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9145.564900012687
+        },
+        {
+          "index": 99,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8461.096200044267
+        }
+      ],
+      "dropped": 0,
+      "error_rate": 0.0,
+      "p50_ms": 4748.125499929301,
+      "p95_ms": 9558.445799979381,
+      "p99_ms": 9739.784099976532,
+      "max_ms": 9794.273500097916,
+      "inventory": {
+        "ok": true,
+        "sold": 185,
+        "available": 99815,
+        "expected_201": 185
+      }
+    },
+    {
+      "concurrency": 150,
+      "sent": 150,
+      "2xx": 132,
+      "409": 0,
+      "4xx_other": 0,
+      "5xx": 0,
+      "timeouts": 18,
+      "connection_errors": 0,
+      "other_errors": 0,
+      "cancelled": 0,
+      "other_http": 0,
+      "wall_seconds": 10.270470999996178,
+      "throughput_rps": 14.604977707454296,
+      "interrupted": false,
+      "requests": [
+        {
+          "index": 0,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2499.7481999453157
+        },
+        {
+          "index": 1,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7711.095600039698
+        },
+        {
+          "index": 2,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3229.80699990876
+        },
+        {
+          "index": 3,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7317.868400015868
+        },
+        {
+          "index": 4,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7915.755099966191
+        },
+        {
+          "index": 5,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3584.506699931808
+        },
+        {
+          "index": 6,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3202.1421000827104
+        },
+        {
+          "index": 7,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5089.282399974763
+        },
+        {
+          "index": 8,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2378.5559999523684
+        },
+        {
+          "index": 9,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2476.7893999814987
+        },
+        {
+          "index": 10,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2974.6152999578044
+        },
+        {
+          "index": 11,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2981.129700085148
+        },
+        {
+          "index": 12,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7297.7780000073835
+        },
+        {
+          "index": 13,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5975.864900043234
+        },
+        {
+          "index": 14,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5069.720100029372
+        },
+        {
+          "index": 15,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8968.391600064933
+        },
+        {
+          "index": 16,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3187.4649000819772
+        },
+        {
+          "index": 17,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7264.598899986595
+        },
+        {
+          "index": 18,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10021.32280007936
+        },
+        {
+          "index": 19,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10027.34460006468
+        },
+        {
+          "index": 20,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7267.23460003268
+        },
+        {
+          "index": 21,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2753.5127999726683
+        },
+        {
+          "index": 22,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2764.6547000622377
+        },
+        {
+          "index": 23,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2560.4931000852957
+        },
+        {
+          "index": 24,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7658.956500003114
+        },
+        {
+          "index": 25,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10012.149199959822
+        },
+        {
+          "index": 26,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2543.754499987699
+        },
+        {
+          "index": 27,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1347.1851999638602
+        },
+        {
+          "index": 28,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4226.4409000054
+        },
+        {
+          "index": 29,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10008.547900011763
+        },
+        {
+          "index": 30,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10011.501700035296
+        },
+        {
+          "index": 31,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9330.143600003794
+        },
+        {
+          "index": 32,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6333.101100055501
+        },
+        {
+          "index": 33,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6119.835800025612
+        },
+        {
+          "index": 34,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2736.9985000696033
+        },
+        {
+          "index": 35,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9432.361099985428
+        },
+        {
+          "index": 36,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2405.49649996683
+        },
+        {
+          "index": 37,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1609.3795999186113
+        },
+        {
+          "index": 38,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10023.542799986899
+        },
+        {
+          "index": 39,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1323.8239999627694
+        },
+        {
+          "index": 40,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3928.402499994263
+        },
+        {
+          "index": 41,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9734.849000000395
+        },
+        {
+          "index": 42,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3214.638300007209
+        },
+        {
+          "index": 43,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10022.819300065748
+        },
+        {
+          "index": 44,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3809.0443999972194
+        },
+        {
+          "index": 45,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3123.1098999269307
+        },
+        {
+          "index": 46,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7304.329199949279
+        },
+        {
+          "index": 47,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3689.2043999396265
+        },
+        {
+          "index": 48,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9598.20090001449
+        },
+        {
+          "index": 49,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1305.744000012055
+        },
+        {
+          "index": 50,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3792.4429000122473
+        },
+        {
+          "index": 51,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7596.054599969648
+        },
+        {
+          "index": 52,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8189.002499915659
+        },
+        {
+          "index": 53,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10010.829799924977
+        },
+        {
+          "index": 54,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3684.05859998893
+        },
+        {
+          "index": 55,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4072.6353999925777
+        },
+        {
+          "index": 56,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9893.476800061762
+        },
+        {
+          "index": 57,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10010.862200055271
+        },
+        {
+          "index": 58,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9480.423899949528
+        },
+        {
+          "index": 59,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6788.349300040863
+        },
+        {
+          "index": 60,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 1293.4931999770924
+        },
+        {
+          "index": 61,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7962.030100054108
+        },
+        {
+          "index": 62,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10009.50050004758
+        },
+        {
+          "index": 63,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9575.100300018676
+        },
+        {
+          "index": 64,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9382.631100015715
+        },
+        {
+          "index": 65,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10011.951299966313
+        },
+        {
+          "index": 66,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8690.164300031029
+        },
+        {
+          "index": 67,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3073.5458999406546
+        },
+        {
+          "index": 68,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9168.42319990974
+        },
+        {
+          "index": 69,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3449.2935000453144
+        },
+        {
+          "index": 70,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10010.157600045204
+        },
+        {
+          "index": 71,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3550.345499999821
+        },
+        {
+          "index": 72,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8360.385700012557
+        },
+        {
+          "index": 73,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8446.862800046802
+        },
+        {
+          "index": 74,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9442.07909994293
+        },
+        {
+          "index": 75,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3442.0679999748245
+        },
+        {
+          "index": 76,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4047.795500024222
+        },
+        {
+          "index": 77,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9650.258100009523
+        },
+        {
+          "index": 78,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4432.587799965404
+        },
+        {
+          "index": 79,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3926.838399958797
+        },
+        {
+          "index": 80,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10012.077699997462
+        },
+        {
+          "index": 81,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8331.401800038293
+        },
+        {
+          "index": 82,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7833.885799976997
+        },
+        {
+          "index": 83,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9934.85800002236
+        },
+        {
+          "index": 84,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9328.650899929926
+        },
+        {
+          "index": 85,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9147.780600003898
+        },
+        {
+          "index": 86,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8514.835700043477
+        },
+        {
+          "index": 87,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3316.1097000120208
+        },
+        {
+          "index": 88,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4618.624199996702
+        },
+        {
+          "index": 89,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4117.479100008495
+        },
+        {
+          "index": 90,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9427.440700004809
+        },
+        {
+          "index": 91,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8708.578999969177
+        },
+        {
+          "index": 92,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4006.677999976091
+        },
+        {
+          "index": 93,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7812.933300039731
+        },
+        {
+          "index": 94,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4696.797600015998
+        },
+        {
+          "index": 95,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6621.728600002825
+        },
+        {
+          "index": 96,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9134.173800004646
+        },
+        {
+          "index": 97,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7196.217000018805
+        },
+        {
+          "index": 98,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3808.5947999497876
+        },
+        {
+          "index": 99,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4317.3718000762165
+        },
+        {
+          "index": 100,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7785.208199988119
+        },
+        {
+          "index": 101,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4792.902700020932
+        },
+        {
+          "index": 102,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10028.905400075018
+        },
+        {
+          "index": 103,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10026.58770000562
+        },
+        {
+          "index": 104,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7682.430599932559
+        },
+        {
+          "index": 105,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4285.658200038597
+        },
+        {
+          "index": 106,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8103.958299965598
+        },
+        {
+          "index": 107,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4289.560800069012
+        },
+        {
+          "index": 108,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9110.168500104919
+        },
+        {
+          "index": 109,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7683.879000018351
+        },
+        {
+          "index": 110,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7876.065999967977
+        },
+        {
+          "index": 111,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5975.537599995732
+        },
+        {
+          "index": 112,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7660.435099969618
+        },
+        {
+          "index": 113,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5064.046300016344
+        },
+        {
+          "index": 114,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10016.12489996478
+        },
+        {
+          "index": 115,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10020.704799913801
+        },
+        {
+          "index": 116,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10024.103500065394
+        },
+        {
+          "index": 117,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4659.875899902545
+        },
+        {
+          "index": 118,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6764.109599986114
+        },
+        {
+          "index": 119,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5572.561400011182
+        },
+        {
+          "index": 120,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5395.985000068322
+        },
+        {
+          "index": 121,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5764.294599997811
+        },
+        {
+          "index": 122,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9942.652700003237
+        },
+        {
+          "index": 123,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6261.142199975438
+        },
+        {
+          "index": 124,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4948.573099914938
+        },
+        {
+          "index": 125,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5342.980300076306
+        },
+        {
+          "index": 126,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6238.683499977924
+        },
+        {
+          "index": 127,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5549.01219997555
+        },
+        {
+          "index": 128,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5838.528599939309
+        },
+        {
+          "index": 129,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5929.926899960265
+        },
+        {
+          "index": 130,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5368.882399983704
+        },
+        {
+          "index": 131,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5354.431999963708
+        },
+        {
+          "index": 132,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6254.0921999607235
+        },
+        {
+          "index": 133,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8031.401099986397
+        },
+        {
+          "index": 134,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4849.841200048104
+        },
+        {
+          "index": 135,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5946.9732999568805
+        },
+        {
+          "index": 136,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5834.1626999899745
+        },
+        {
+          "index": 137,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9118.868499994278
+        },
+        {
+          "index": 138,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8630.603199941106
+        },
+        {
+          "index": 139,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5110.811099992134
+        },
+        {
+          "index": 140,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5344.325999962166
+        },
+        {
+          "index": 141,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8028.242000029422
+        },
+        {
+          "index": 142,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8518.721799948253
+        },
+        {
+          "index": 143,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5318.006900022738
+        },
+        {
+          "index": 144,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5014.072699937969
+        },
+        {
+          "index": 145,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7822.460800060071
+        },
+        {
+          "index": 146,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8526.81599999778
+        },
+        {
+          "index": 147,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8894.213000079617
+        },
+        {
+          "index": 148,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5500.265099923126
+        },
+        {
+          "index": 149,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9724.223800003529
+        }
+      ],
+      "dropped": 18,
+      "error_rate": 0.12,
+      "p50_ms": 6333.101100055501,
+      "p95_ms": 10020.704799913801,
+      "p99_ms": 10027.34460006468,
+      "max_ms": 10028.905400075018,
+      "inventory": {
+        "ok": false,
+        "sold": 335,
+        "available": 99665,
+        "expected_201": 317
+      }
+    },
+    {
+      "concurrency": 200,
+      "sent": 200,
+      "2xx": 76,
+      "409": 0,
+      "4xx_other": 0,
+      "5xx": 0,
+      "timeouts": 124,
+      "connection_errors": 0,
+      "other_errors": 0,
+      "cancelled": 0,
+      "other_http": 0,
+      "wall_seconds": 10.69963279995136,
+      "throughput_rps": 18.692230260547746,
+      "interrupted": false,
+      "requests": [
+        {
+          "index": 0,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3449.3554000509903
+        },
+        {
+          "index": 1,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8963.973099947907
+        },
+        {
+          "index": 2,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3050.016099936329
+        },
+        {
+          "index": 3,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 2744.535499950871
+        },
+        {
+          "index": 4,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8844.995900057256
+        },
+        {
+          "index": 5,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3432.813400053419
+        },
+        {
+          "index": 6,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3371.6705000260845
+        },
+        {
+          "index": 7,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3759.2700000386685
+        },
+        {
+          "index": 8,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7652.239999966696
+        },
+        {
+          "index": 9,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9155.48850002233
+        },
+        {
+          "index": 10,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7442.63360009063
+        },
+        {
+          "index": 11,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3626.4238000148907
+        },
+        {
+          "index": 12,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8042.7747999783605
+        },
+        {
+          "index": 13,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10015.203600050882
+        },
+        {
+          "index": 14,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3030.2988999756053
+        },
+        {
+          "index": 15,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4316.65759999305
+        },
+        {
+          "index": 16,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10015.314599964768
+        },
+        {
+          "index": 17,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7220.046399976127
+        },
+        {
+          "index": 18,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8123.863399960101
+        },
+        {
+          "index": 19,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7239.515400025994
+        },
+        {
+          "index": 20,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4010.574799962342
+        },
+        {
+          "index": 21,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10013.54590000119
+        },
+        {
+          "index": 22,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10019.151800079271
+        },
+        {
+          "index": 23,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8606.883800006472
+        },
+        {
+          "index": 24,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6017.734199995175
+        },
+        {
+          "index": 25,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9020.561799989082
+        },
+        {
+          "index": 26,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3507.8063999535516
+        },
+        {
+          "index": 27,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9404.126000008546
+        },
+        {
+          "index": 28,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8408.107899944298
+        },
+        {
+          "index": 29,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6702.959400019608
+        },
+        {
+          "index": 30,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10022.577499970794
+        },
+        {
+          "index": 31,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7909.734399989247
+        },
+        {
+          "index": 32,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4402.863499941304
+        },
+        {
+          "index": 33,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4502.981300000101
+        },
+        {
+          "index": 34,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10021.380199934356
+        },
+        {
+          "index": 35,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5897.114099934697
+        },
+        {
+          "index": 36,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4881.324899964966
+        },
+        {
+          "index": 37,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9095.89610004332
+        },
+        {
+          "index": 38,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8990.76029995922
+        },
+        {
+          "index": 39,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8079.063400044106
+        },
+        {
+          "index": 40,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5882.123799994588
+        },
+        {
+          "index": 41,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9580.941000021994
+        },
+        {
+          "index": 42,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7377.196799963713
+        },
+        {
+          "index": 43,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5175.043200026266
+        },
+        {
+          "index": 44,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 4267.748199985363
+        },
+        {
+          "index": 45,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10005.625399993733
+        },
+        {
+          "index": 46,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8264.600700000301
+        },
+        {
+          "index": 47,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7361.3601999823
+        },
+        {
+          "index": 48,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7763.984099961817
+        },
+        {
+          "index": 49,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7376.405699993484
+        },
+        {
+          "index": 50,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 3862.160100019537
+        },
+        {
+          "index": 51,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8656.341699999757
+        },
+        {
+          "index": 52,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10018.95199995488
+        },
+        {
+          "index": 53,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5363.091600011103
+        },
+        {
+          "index": 54,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6878.919799928553
+        },
+        {
+          "index": 55,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6962.840599939227
+        },
+        {
+          "index": 56,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7063.27769998461
+        },
+        {
+          "index": 57,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10015.73179999832
+        },
+        {
+          "index": 58,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8548.465900006704
+        },
+        {
+          "index": 59,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8648.816799977794
+        },
+        {
+          "index": 60,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7750.324700027704
+        },
+        {
+          "index": 61,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8242.318500066176
+        },
+        {
+          "index": 62,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6238.542299950495
+        },
+        {
+          "index": 63,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9345.443300087936
+        },
+        {
+          "index": 64,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10008.762800018303
+        },
+        {
+          "index": 65,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9138.124900055118
+        },
+        {
+          "index": 66,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9544.595199986361
+        },
+        {
+          "index": 67,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8927.988200099207
+        },
+        {
+          "index": 68,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10007.839299971238
+        },
+        {
+          "index": 69,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 6741.130599984899
+        },
+        {
+          "index": 70,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7831.032899906859
+        },
+        {
+          "index": 71,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9938.516599941067
+        },
+        {
+          "index": 72,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10006.686299922876
+        },
+        {
+          "index": 73,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10010.692900046706
+        },
+        {
+          "index": 74,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 5627.022100030445
+        },
+        {
+          "index": 75,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9428.189199999906
+        },
+        {
+          "index": 76,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10022.813400020823
+        },
+        {
+          "index": 77,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 7421.496799914166
+        },
+        {
+          "index": 78,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8106.726899975911
+        },
+        {
+          "index": 79,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10026.170500088483
+        },
+        {
+          "index": 80,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10003.230400034226
+        },
+        {
+          "index": 81,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8615.088199963793
+        },
+        {
+          "index": 82,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10047.979899914935
+        },
+        {
+          "index": 83,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10050.698300008662
+        },
+        {
+          "index": 84,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10053.30489994958
+        },
+        {
+          "index": 85,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10055.882100015879
+        },
+        {
+          "index": 86,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10058.556000003591
+        },
+        {
+          "index": 87,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8298.880800022744
+        },
+        {
+          "index": 88,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10059.530399972573
+        },
+        {
+          "index": 89,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10062.230400042608
+        },
+        {
+          "index": 90,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10069.942899979651
+        },
+        {
+          "index": 91,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10072.517899912782
+        },
+        {
+          "index": 92,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10074.956100084819
+        },
+        {
+          "index": 93,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 8376.889900071546
+        },
+        {
+          "index": 94,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9772.998900036328
+        },
+        {
+          "index": 95,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9186.311000026762
+        },
+        {
+          "index": 96,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9567.130699986592
+        },
+        {
+          "index": 97,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 10007.196800084785
+        },
+        {
+          "index": 98,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10098.071900079958
+        },
+        {
+          "index": 99,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10081.078400020488
+        },
+        {
+          "index": 100,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10083.52260000538
+        },
+        {
+          "index": 101,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10086.016100016423
+        },
+        {
+          "index": 102,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10088.563699973747
+        },
+        {
+          "index": 103,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10093.34929997567
+        },
+        {
+          "index": 104,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10095.480200019665
+        },
+        {
+          "index": 105,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10097.62709995266
+        },
+        {
+          "index": 106,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10099.79539993219
+        },
+        {
+          "index": 107,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10101.656000013463
+        },
+        {
+          "index": 108,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9474.572699982673
+        },
+        {
+          "index": 109,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10101.367500028573
+        },
+        {
+          "index": 110,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10104.238100000657
+        },
+        {
+          "index": 111,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10106.630600057542
+        },
+        {
+          "index": 112,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10108.801299938932
+        },
+        {
+          "index": 113,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9984.95750001166
+        },
+        {
+          "index": 114,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10109.203700092621
+        },
+        {
+          "index": 115,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10111.322400043719
+        },
+        {
+          "index": 116,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10113.674500025809
+        },
+        {
+          "index": 117,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10115.602399921045
+        },
+        {
+          "index": 118,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10117.614000104368
+        },
+        {
+          "index": 119,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10119.741400005296
+        },
+        {
+          "index": 120,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10121.917999931611
+        },
+        {
+          "index": 121,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10123.965700040571
+        },
+        {
+          "index": 122,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10127.116100047715
+        },
+        {
+          "index": 123,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10139.598699985072
+        },
+        {
+          "index": 124,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9448.584099998698
+        },
+        {
+          "index": 125,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10150.045400019735
+        },
+        {
+          "index": 126,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10152.022000052966
+        },
+        {
+          "index": 127,
+          "operation": "booking",
+          "status": 201,
+          "exception_type": null,
+          "exception_category": null,
+          "latency_ms": 9920.37700000219
+        },
+        {
+          "index": 128,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10152.162400074303
+        },
+        {
+          "index": 129,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10154.160400037654
+        },
+        {
+          "index": 130,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10156.216200091876
+        },
+        {
+          "index": 131,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10158.297199988738
+        },
+        {
+          "index": 132,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10160.531900008209
+        },
+        {
+          "index": 133,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10162.574699963443
+        },
+        {
+          "index": 134,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10164.635699940845
+        },
+        {
+          "index": 135,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10166.710499906912
+        },
+        {
+          "index": 136,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10168.766400078312
+        },
+        {
+          "index": 137,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10195.894299889915
+        },
+        {
+          "index": 138,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10197.852400015108
+        },
+        {
+          "index": 139,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10199.722399935126
+        },
+        {
+          "index": 140,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10239.870899938978
+        },
+        {
+          "index": 141,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10203.553700004704
+        },
+        {
+          "index": 142,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10205.442000064068
+        },
+        {
+          "index": 143,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10207.2874000296
+        },
+        {
+          "index": 144,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10208.774300059304
+        },
+        {
+          "index": 145,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10210.547699942254
+        },
+        {
+          "index": 146,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10212.645099963993
+        },
+        {
+          "index": 147,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10214.491699938662
+        },
+        {
+          "index": 148,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10216.240999987349
+        },
+        {
+          "index": 149,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10226.242500008084
+        },
+        {
+          "index": 150,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10228.043299983256
+        },
+        {
+          "index": 151,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10230.543400044553
+        },
+        {
+          "index": 152,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10232.88009990938
+        },
+        {
+          "index": 153,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10235.503799980506
+        },
+        {
+          "index": 154,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10238.299400079995
+        },
+        {
+          "index": 155,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10241.123200044967
+        },
+        {
+          "index": 156,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10243.794099893421
+        },
+        {
+          "index": 157,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10245.995900011621
+        },
+        {
+          "index": 158,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10247.68699996639
+        },
+        {
+          "index": 159,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10249.035999993794
+        },
+        {
+          "index": 160,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10250.29709993396
+        },
+        {
+          "index": 161,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10251.434099976905
+        },
+        {
+          "index": 162,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10252.611299976707
+        },
+        {
+          "index": 163,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10253.787699970417
+        },
+        {
+          "index": 164,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10255.20619994495
+        },
+        {
+          "index": 165,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10256.385899963789
+        },
+        {
+          "index": 166,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10257.675500004552
+        },
+        {
+          "index": 167,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10258.887400035746
+        },
+        {
+          "index": 168,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10259.997899993323
+        },
+        {
+          "index": 169,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10261.537399957888
+        },
+        {
+          "index": 170,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10263.066899962723
+        },
+        {
+          "index": 171,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10264.259099960327
+        },
+        {
+          "index": 172,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10265.408700099215
+        },
+        {
+          "index": 173,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10266.57029998023
+        },
+        {
+          "index": 174,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10267.932099988684
+        },
+        {
+          "index": 175,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10269.164399942383
+        },
+        {
+          "index": 176,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10270.745099987835
+        },
+        {
+          "index": 177,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10272.971700062044
+        },
+        {
+          "index": 178,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10275.505299912766
+        },
+        {
+          "index": 179,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10277.49899995979
+        },
+        {
+          "index": 180,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10279.70389998518
+        },
+        {
+          "index": 181,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10281.557100010104
+        },
+        {
+          "index": 182,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10283.639500034042
+        },
+        {
+          "index": 183,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10285.673600039445
+        },
+        {
+          "index": 184,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10287.051299936138
+        },
+        {
+          "index": 185,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10288.370799971744
+        },
+        {
+          "index": 186,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10289.86579994671
+        },
+        {
+          "index": 187,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10291.126700001769
+        },
+        {
+          "index": 188,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10292.423499980941
+        },
+        {
+          "index": 189,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10293.793400051072
+        },
+        {
+          "index": 190,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10295.105900033377
+        },
+        {
+          "index": 191,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10296.491499990225
+        },
+        {
+          "index": 192,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10298.123699962161
+        },
+        {
+          "index": 193,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10300.142400083132
+        },
+        {
+          "index": 194,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10301.161299925297
+        },
+        {
+          "index": 195,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10302.282399963588
+        },
+        {
+          "index": 196,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10303.32870001439
+        },
+        {
+          "index": 197,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10304.358800058253
+        },
+        {
+          "index": 198,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10305.386300082318
+        },
+        {
+          "index": 199,
+          "operation": "booking",
+          "status": null,
+          "exception_type": "TimeoutError",
+          "exception_category": "timeout",
+          "latency_ms": 10306.89759994857
+        }
+      ],
+      "dropped": 124,
+      "error_rate": 0.62,
+      "p50_ms": 10069.942899979651,
+      "p95_ms": 10293.793400051072,
+      "p99_ms": 10304.358800058253,
+      "max_ms": 10306.89759994857,
+      "inventory": {
+        "ok": false,
+        "sold": 434,
+        "available": 99566,
+        "expected_201": 393
+      }
+    }
+  ],
+  "event_id": 64,
+  "seed_bookings": 0
+}
