@@ -1,7 +1,13 @@
 import secrets, string
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, func, Boolean, Text, Date
+from datetime import datetime, timezone
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, func, Boolean, Text, Date, JSON, Index, UniqueConstraint
 from sqlalchemy.orm import relationship
 from app.database import Base
+
+
+def utcnow():
+    """Naive UTC for the existing timestamp-without-time-zone schema."""
+    return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
 def _ticket_code():
@@ -46,6 +52,7 @@ class Venue(Base):
 
 class Event(Base):
     __tablename__ = "events"
+    __table_args__ = (Index("ix_events_status_date", "status", "event_date"),)
     id                 = Column(Integer, primary_key=True, index=True)
     name               = Column(String, nullable=False)
     venue              = Column(String, nullable=False)          # free-text kept for compat
@@ -55,7 +62,7 @@ class Event(Base):
     total_tickets      = Column(Integer, nullable=False)
     available_tickets  = Column(Integer, nullable=False)
     organizer_id       = Column(Integer, ForeignKey("users.id"), nullable=False)
-    category           = Column(String, default="Other", nullable=False)
+    category           = Column(String, default="Other", nullable=False, index=True)
     image_url          = Column(String, nullable=True)
     banner_url         = Column(String, nullable=True)
     price              = Column(Integer, default=0, nullable=False)   # base price (paise)
@@ -75,7 +82,7 @@ class Event(Base):
 class TicketTier(Base):
     __tablename__ = "ticket_tiers"
     id              = Column(Integer, primary_key=True, index=True)
-    event_id        = Column(Integer, ForeignKey("events.id"), nullable=False)
+    event_id        = Column(Integer, ForeignKey("events.id"), nullable=False, index=True)
     name            = Column(String, nullable=False)        # General / VIP / Backstage / IMAX …
     price           = Column(Integer, nullable=False)       # paise
     total_seats     = Column(Integer, nullable=False)
@@ -91,6 +98,10 @@ class TicketTier(Base):
 
 class Booking(Base):
     __tablename__ = "bookings"
+    __table_args__ = (
+        Index("ix_bookings_event_status", "event_id", "status"),
+        Index("ix_bookings_user_created", "user_id", "created_at"),
+    )
     id          = Column(Integer, primary_key=True, index=True)
     user_id     = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     event_id    = Column(Integer, ForeignKey("events.id"), nullable=False, index=True)
@@ -99,6 +110,7 @@ class Booking(Base):
     total_price = Column(Integer, default=0)               # paise
     status      = Column(String, default="confirmed")      # confirmed / cancelled / pending
     created_at  = Column(DateTime, server_default=func.now())
+    cancelled_at = Column(DateTime, nullable=True)
 
     user      = relationship("User", back_populates="bookings")
     event     = relationship("Event", back_populates="bookings")
@@ -118,7 +130,7 @@ class Booking(Base):
 class BookingAttendee(Base):
     __tablename__ = "booking_attendees"
     id          = Column(Integer, primary_key=True, index=True)
-    booking_id  = Column(Integer, ForeignKey("bookings.id"), nullable=False)
+    booking_id  = Column(Integer, ForeignKey("bookings.id"), nullable=False, index=True)
     full_name   = Column(String, nullable=False)
     age         = Column(Integer, nullable=True)
     phone       = Column(String(20), nullable=True)
@@ -164,6 +176,7 @@ class Notification(Base):
     """In-app notification. Written by Background Task 2 (event update) so the
     customer can *see* the alert in the UI, not just in the server console."""
     __tablename__ = "notifications"
+    __table_args__ = (Index("ix_notifications_user_read", "user_id", "is_read"),)
     id         = Column(Integer, primary_key=True, index=True)
     user_id    = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     type       = Column(String, nullable=False)                 # booking_confirmed | event_updated
@@ -171,3 +184,29 @@ class Notification(Base):
     message    = Column(String, nullable=False)
     is_read    = Column(Boolean, default=False, nullable=False)
     created_at = Column(DateTime, server_default=func.now())
+    job_id     = Column(Integer, ForeignKey("outbox_jobs.id"), unique=True, nullable=True)
+
+
+class IdempotencyKey(Base):
+    __tablename__ = "idempotency_keys"
+    __table_args__ = (UniqueConstraint("user_id", "key", name="uq_idempotency_user_key"),)
+    id           = Column(Integer, primary_key=True)
+    user_id      = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    key          = Column(String(80), nullable=False)
+    request_hash = Column(String(64), nullable=False)
+    booking_id   = Column(Integer, ForeignKey("bookings.id"), nullable=True)
+    created_at   = Column(DateTime, default=utcnow, nullable=False)
+
+
+class OutboxJob(Base):
+    __tablename__ = "outbox_jobs"
+    __table_args__ = (Index("ix_outbox_status_attempt", "status", "next_attempt_at"),)
+    id              = Column(Integer, primary_key=True)
+    kind            = Column(String(40), nullable=False)
+    payload         = Column(JSON, nullable=False)
+    status          = Column(String(16), default="pending", nullable=False)
+    attempts        = Column(Integer, default=0, nullable=False)
+    next_attempt_at = Column(DateTime, default=utcnow, nullable=False)
+    last_error      = Column(Text, nullable=True)
+    created_at      = Column(DateTime, default=utcnow, nullable=False)
+    updated_at      = Column(DateTime, default=utcnow, onupdate=utcnow, nullable=False)

@@ -4,19 +4,35 @@ Shared pytest fixtures.
 Key design point: we point the *whole app* at an isolated database **before**
 importing it, so request-scoped sessions and the separate sessions opened by the
 background tasks all share one DB. An externally supplied `DATABASE_URL` is
-respected, so `DATABASE_URL=postgresql://... pytest` exercises the real row lock
-in test_concurrency; otherwise a throwaway SQLite file is used.
+respected only for a separate test database; otherwise a throwaway SQLite file
+is used. The same conditional inventory algorithms run on both backends.
 """
 import os
 import tempfile
+from pathlib import Path
+from sqlalchemy.engine import make_url
 
 import pytest
 
+def validate_test_database(url, temporary_path=None):
+    parsed = make_url(url)
+    database = parsed.database or ""
+    is_temporary = (parsed.get_backend_name() == "sqlite" and temporary_path is not None
+                    and Path(database).resolve() == Path(temporary_path).resolve())
+    if not is_temporary and "test" not in database.lower():
+        raise RuntimeError("Refusing non-test DATABASE_URL; use a separate database whose name contains 'test'")
+
+
+_path = None
 if not os.getenv("DATABASE_URL"):
     _fd, _path = tempfile.mkstemp(suffix=".db")
     os.close(_fd)
     os.environ["DATABASE_URL"] = "sqlite:///" + _path.replace("\\", "/")
-os.environ.setdefault("SECRET_KEY", "test-secret-key")
+validate_test_database(os.environ["DATABASE_URL"], _path)
+# Prevent implicit .env reads and real transport calls in every test/subprocess.
+os.environ["PYTHON_DOTENV_DISABLED"] = "1"
+os.environ.setdefault("SECRET_KEY", "isolated-test-secret-key-at-least-32-characters")
+os.environ["EMAIL_PROVIDER"] = "console"
 
 from fastapi.testclient import TestClient  # noqa: E402
 from app.database import Base, engine, SessionLocal  # noqa: E402

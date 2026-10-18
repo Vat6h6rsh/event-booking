@@ -3,8 +3,8 @@ The two required background tasks. Each asserts BOTH observable effects:
 the console log the exercise asks for (via caplog) AND the in-app notification
 row that makes the alert visible in the UI.
 
-Note: FastAPI/Starlette's TestClient runs background tasks to completion before
-returning the response, so their effects are already present here.
+Without lifespan, outbox.kick() drains synchronously before the response, so
+delivery remains deterministic. Production lifespan runs the dispatcher thread.
 """
 import logging
 

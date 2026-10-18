@@ -16,7 +16,22 @@ dist/
 .DS_Store
 Thumbs.db
 
-# Internal docs (not for repo)
+# Internal docs & design assets (not for repo)
 DEPLOY.md
 SHOWCASE.md
 GIT_SETUP.md
+ui_overhaul/
+
+# Internal docs, research & agent files (only README.md ships)
+docs/
+AGENTS.md
+PROJECT.md
+DEPLOYMENT.md
+DEMO_SCRIPT.md
+problem_statement.md
+multi-agent-workflow.md
+ui-ux-learning-guide.md
+.commandcode/
+
+# Load-test credential cache
+loadtest/.users.json

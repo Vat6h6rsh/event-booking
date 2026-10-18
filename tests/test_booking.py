@@ -10,7 +10,7 @@ def test_booking_decrements_inventory(client, organizer, customer, make_event):
 
 def test_overbooking_is_rejected_409(client, organizer, customer, make_event):
     event = make_event(organizer, total_tickets=5)
-    r = client.post("/bookings", json={"event_id": event["id"], "quantity": 99}, headers=customer)
+    r = client.post("/bookings", json={"event_id": event["id"], "quantity": 6}, headers=customer)
     assert r.status_code == 409
     # inventory untouched by the rejected request
     assert client.get(f"/events/{event['id']}").json()["available_tickets"] == 5

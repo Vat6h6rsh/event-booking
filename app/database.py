@@ -26,9 +26,42 @@ connect_args = (
     else {}
 )
 
-engine = create_engine(DATABASE_URL, connect_args=connect_args)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+pool_options = {} if DATABASE_URL.startswith("sqlite") else {
+    "pool_size": int(os.getenv("DB_POOL_SIZE", "20")),
+    "max_overflow": int(os.getenv("DB_MAX_OVERFLOW", "20")),
+    "pool_timeout": 10,
+    "pool_pre_ping": True,
+}
+engine = create_engine(DATABASE_URL, connect_args=connect_args, **pool_options)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, expire_on_commit=False, bind=engine)
 Base = declarative_base()
+
+
+def ensure_schema():
+    """create_all + a tiny additive upgrade for databases created by an older version.
+
+    `create_all` creates missing tables but never alters existing ones, so a DB first
+    created by v2 would lack v3's new nullable columns and indexes. Only additive,
+    idempotent DDL here — nothing is ever dropped or rewritten.
+    """
+    from sqlalchemy import inspect, text
+    import app.models  # noqa: F401 — register every model on Base.metadata
+
+    Base.metadata.create_all(bind=engine)
+    insp = inspect(engine)
+    added = {  # (table, column) -> DDL type, for columns added after v2
+        ("bookings", "cancelled_at"): "TIMESTAMP",
+        ("notifications", "job_id"): "INTEGER",
+    }
+    with engine.begin() as conn:
+        for (table, column), ddl_type in added.items():
+            if column not in {c["name"] for c in insp.get_columns(table)}:
+                conn.execute(text(f"ALTER TABLE {table} ADD COLUMN {column} {ddl_type}"))
+        conn.execute(text(
+            "CREATE UNIQUE INDEX IF NOT EXISTS uq_notifications_job_id ON notifications (job_id)"))
+    for table in Base.metadata.sorted_tables:
+        for index in table.indexes:
+            index.create(bind=engine, checkfirst=True)
 
 
 def get_db():

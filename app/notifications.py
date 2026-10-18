@@ -1,67 +1,59 @@
-"""
-Notification dispatch — the seam behind the two background tasks.
-
-The routers schedule `app.tasks.*` on FastAPI `BackgroundTasks`; those thin
-wrappers delegate here. Keeping dispatch behind a `Notifier` interface means the
-delivery mechanism is a swap-one-line decision: today a `LogNotifier` (console log
-+ an in-app record); in production a `CeleryNotifier` / `EmailNotifier` that pushes
-onto a durable queue. The routers never change.
-"""
+﻿"""Swappable delivery seam: one in-app record per job, plus transactional email."""
 import logging
 
-from sqlalchemy.orm import Session
+from sqlalchemy.dialects.postgresql import insert as pg_insert
+from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 
+from app import email
 from app.models import Notification
 
 logger = logging.getLogger("jtickets.notifications")
 
 
 class Notifier:
-    """Delivery interface. Implementations decide *how* a notification goes out."""
-
-    def booking_confirmed(self, db: Session, *, user_id: int, email: str,
-                          event_name: str, booking_id: int) -> None:
+    def booking_confirmed(self, db, *, booking, job_id):
         raise NotImplementedError
 
-    def event_updated(self, db: Session, *, user_id: int, event_id: int,
-                      event_name: str) -> None:
+    def event_updated(self, db, *, user, event, summary, job_id):
         raise NotImplementedError
 
 
-class LogNotifier(Notifier):
-    """Default: emit a structured log line AND persist an in-app notification.
-
-    The `[EMAIL]` / `[NOTIFY]` markers are kept explicit so they are easy to point
-    at during the demo; the in-app row is what lets the customer *see* the alert.
-    """
-
-    def booking_confirmed(self, db: Session, *, user_id: int, email: str,
-                          event_name: str, booking_id: int) -> None:
-        logger.info(
-            "[EMAIL] Booking confirmation -> %s | event=%r booking_id=%s",
-            email, event_name, booking_id,
-        )
-        db.add(Notification(
-            user_id=user_id,
-            type="booking_confirmed",
-            message=f"Your booking for '{event_name}' is confirmed. 🎟️",
-        ))
-        db.commit()
-
-    def event_updated(self, db: Session, *, user_id: int, event_id: int,
-                     event_name: str) -> None:
-        logger.info(
-            "[NOTIFY] User %s notified -> event %r (id=%s) was updated",
-            user_id, event_name, event_id,
-        )
-        db.add(Notification(
-            user_id=user_id,
-            type="event_updated",
-            event_id=event_id,
-            message=f"'{event_name}' — an event you booked was just updated. Check the latest details.",
-        ))
-        db.commit()
+def _persist(db, **values):
+    insert = sqlite_insert if db.bind.dialect.name == "sqlite" else pg_insert
+    db.execute(insert(Notification).values(**values).on_conflict_do_nothing(index_elements=["job_id"]))
+    # Release the connection before network I/O. A retry sends email again but
+    # job_id uniqueness protects the in-app record.
+    db.commit()
 
 
-# The single dispatch point the app imports. Reassign to swap delivery backends.
-notifier: Notifier = LogNotifier()
+class EmailNotifier(Notifier):
+    def booking_confirmed(self, db, *, booking, job_id):
+        event = booking.event
+        recipient = booking.user.email
+        subject = f"Booking confirmation - {event.name}"
+        total = f"{booking.total_price // 100}.{booking.total_price % 100:02d}"
+        html, text = email.template("Your booking is confirmed", [
+            f"Event: {event.name}", f"Date: {email.ist_date(event.event_date)}",
+            f"Venue: {event.venue}", f"Tier: {booking.tier.name if booking.tier else 'General'}",
+            f"Quantity: {booking.quantity}", f"Total: ₹{total}",
+            f"Booking ID: {booking.id}",
+            "Ticket codes: " + ", ".join(a.ticket_code for a in booking.attendees),
+        ])
+        _persist(db, user_id=booking.user_id, event_id=event.id, job_id=job_id,
+                 type="booking_confirmed", message=f"Your booking for '{event.name}' is confirmed.")
+        email.send_email(recipient, subject, html, text)
+        logger.info("[EMAIL] Booking confirmation delivered | job_id=%s", job_id)
+
+    def event_updated(self, db, *, user, event, summary, job_id):
+        recipient = user.email
+        subject = f"Event update - {event.name}"
+        html, text = email.template("An event you booked has changed", [
+            f"Event: {event.name}", summary,
+        ])
+        _persist(db, user_id=user.id, event_id=event.id, job_id=job_id,
+                 type="event_updated", message=f"'{event.name}' was updated. {summary}")
+        email.send_email(recipient, subject, html, text)
+        logger.info("[NOTIFY] Event update delivered | job_id=%s", job_id)
+
+
+notifier: Notifier = EmailNotifier()

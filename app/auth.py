@@ -1,4 +1,6 @@
 import os
+import logging
+import secrets
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
@@ -8,10 +10,20 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
-from app.database import get_db
+from app.database import get_db, DATABASE_URL
 from app.models import User
 
-SECRET_KEY = os.getenv("SECRET_KEY", "change-me-in-production-use-a-long-random-string")
+def validate_secret():
+    configured = os.getenv("SECRET_KEY", "").strip()
+    if DATABASE_URL.startswith("postgresql") and len(configured) < 32:
+        raise RuntimeError("SECRET_KEY must contain at least 32 characters when using PostgreSQL")
+    return configured
+
+
+SECRET_KEY = validate_secret()
+if len(SECRET_KEY) < 32:
+    SECRET_KEY = secrets.token_urlsafe(48)
+    logging.getLogger("jtickets.auth").warning("Using a random per-process development JWT key; tokens expire on restart")
 ALGORITHM  = "HS256"
 TOKEN_TTL  = 24  # hours
 

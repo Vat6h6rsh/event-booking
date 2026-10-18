@@ -1,6 +1,32 @@
-from datetime import datetime, date
-from typing import Optional, List, Literal
-from pydantic import BaseModel, EmailStr, Field
+from datetime import datetime, date, timezone
+from typing import Optional, List, Literal, ClassVar
+from pydantic import BaseModel, EmailStr, Field, model_validator, field_validator
+
+
+class PartialUpdate(BaseModel):
+    required_columns: ClassVar[set[str]] = set()
+
+    @model_validator(mode="before")
+    @classmethod
+    def reject_required_nulls(cls, values):
+        if isinstance(values, dict) and any(k in values and values[k] is None for k in cls.required_columns):
+            raise ValueError("Required fields cannot be null")
+        return values
+
+
+class EventDates(BaseModel):
+    @field_validator("event_date", "end_date", check_fields=False)
+    @classmethod
+    def utc_dates(cls, value):
+        if value is not None and value.tzinfo:
+            return value.astimezone(timezone.utc).replace(tzinfo=None)
+        return value
+
+    @model_validator(mode="after")
+    def valid_dates(self):
+        if self.event_date and self.end_date and self.end_date < self.event_date:
+            raise ValueError("end_date must be on or after event_date")
+        return self
 
 # ── Auth / User ───────────────────────────────────────────────────────────────
 
@@ -44,12 +70,13 @@ class VenueCreate(BaseModel):
     image_url:   Optional[str] = None
     website:     Optional[str] = None
 
-class VenueUpdate(BaseModel):
-    name:        Optional[str] = None
-    address:     Optional[str] = None
-    city:        Optional[str] = None
+class VenueUpdate(PartialUpdate):
+    required_columns = {"name", "address", "city", "capacity"}
+    name:        Optional[str] = Field(None, min_length=1)
+    address:     Optional[str] = Field(None, min_length=1)
+    city:        Optional[str] = Field(None, min_length=1)
     state:       Optional[str] = None
-    capacity:    Optional[int] = None
+    capacity:    Optional[int] = Field(None, gt=0)
     description: Optional[str] = None
     image_url:   Optional[str] = None
     website:     Optional[str] = None
@@ -72,7 +99,7 @@ class VenueOut(BaseModel):
 # ── Ticket Tier ───────────────────────────────────────────────────────────────
 
 class TierCreate(BaseModel):
-    name:        str
+    name:        str = Field(min_length=1)
     price:       int = Field(ge=0)
     total_seats: int = Field(gt=0)
     color:       str = "#A78BFA"
@@ -80,9 +107,12 @@ class TierCreate(BaseModel):
     benefits:    Optional[str] = None
     position:    int = 0
 
-class TierUpdate(BaseModel):
-    name:        Optional[str] = None
-    price:       Optional[int] = None
+class TierUpdate(PartialUpdate):
+    required_columns = {"name", "price", "total_seats", "color", "position"}
+    name:        Optional[str] = Field(None, min_length=1)
+    price:       Optional[int] = Field(None, ge=0)
+    total_seats: Optional[int] = Field(None, gt=0)
+    position:    Optional[int] = None
     color:       Optional[str] = None
     description: Optional[str] = None
     benefits:    Optional[str] = None
@@ -102,10 +132,10 @@ class TierOut(BaseModel):
 
 # ── Event ─────────────────────────────────────────────────────────────────────
 
-class EventCreate(BaseModel):
+class EventCreate(EventDates):
     name:               str = Field(min_length=1)
     venue:              str = Field(min_length=1)
-    venue_id:           Optional[int]      = None
+    venue_id:           Optional[int]      = Field(None, gt=0)
     event_date:         datetime
     end_date:           Optional[datetime] = None
     total_tickets:      int = Field(gt=0)
@@ -118,23 +148,34 @@ class EventCreate(BaseModel):
     event_type:         str = "Other"
     has_seat_selection: bool = False
     tags:               Optional[str] = None
-    status:             str = "published"
+    status:             Literal["draft", "published", "cancelled"] = "published"
 
-class EventUpdate(BaseModel):
-    name:               Optional[str]      = None
-    venue:              Optional[str]      = None
+class EventUpdate(PartialUpdate, EventDates):
+    required_columns = {"name", "venue", "event_date", "total_tickets", "category", "price", "age_rating", "event_type", "has_seat_selection", "status"}
+    name:               Optional[str]      = Field(None, min_length=1)
+    venue:              Optional[str]      = Field(None, min_length=1)
+    venue_id:           Optional[int]      = Field(None, gt=0)
     event_date:         Optional[datetime] = None
     end_date:           Optional[datetime] = None
+    total_tickets:      Optional[int]      = Field(None, gt=0)
     category:           Optional[str]      = None
     image_url:          Optional[str]      = None
     banner_url:         Optional[str]      = None
-    price:              Optional[int]      = None
+    price:              Optional[int]      = Field(None, ge=0)
     description:        Optional[str]      = None
-    age_rating:         Optional[str]      = None
+    age_rating:         Optional[Literal["U", "UA", "A", "18+"]] = None
     event_type:         Optional[str]      = None
     has_seat_selection: Optional[bool]     = None
     tags:               Optional[str]      = None
-    status:             Optional[str]      = None
+    status:             Optional[Literal["draft", "published", "cancelled"]] = None
+
+class EventStats(BaseModel):
+    event_id:           int
+    confirmed_bookings: int
+    tickets_sold:       int
+    gross_paise:        int   # sum of confirmed booking totals (no payments yet, so not "revenue")
+    cancelled_bookings: int
+
 
 class EventOut(BaseModel):
     id:                 int
@@ -177,10 +218,16 @@ class AttendeeOut(BaseModel):
     model_config = {"from_attributes": True}
 
 class BookingCreate(BaseModel):
-    event_id:  int
-    tier_id:   Optional[int]              = None
-    quantity:  int = Field(gt=0)
-    attendees: Optional[List[AttendeeCreate]] = None
+    event_id:  int = Field(gt=0)
+    tier_id:   Optional[int]              = Field(None, gt=0)
+    quantity:  int = Field(ge=1, le=10)
+    attendees: Optional[List[AttendeeCreate]] = Field(None, max_length=10)
+
+    @model_validator(mode="after")
+    def attendee_count(self):
+        if self.attendees and len(self.attendees) != self.quantity:
+            raise ValueError("attendees must be empty or match quantity")
+        return self
 
 class BookingOut(BaseModel):
     id:          int
