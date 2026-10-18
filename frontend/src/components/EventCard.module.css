@@ -100,3 +100,12 @@
   padding: 2px 9px; border-radius: var(--radius-pill);
   border: 1.5px solid;
 }
+
+.detailLink { font: inherit; text-align: left; border: 0; color: inherit; background: none; padding: 4px 0; }
+.detailLink:hover { text-decoration: underline; }
+.price { background: none; -webkit-text-fill-color: var(--red-dark); color: var(--red-dark); }
+.catBadge { background: #fff; color: var(--dark); }
+.ageBadge { background: #1E1B4B !important; }
+.tierPill { color: var(--dark) !important; }
+.lowBadge { animation: none; }
+.footer { flex-wrap: wrap; }

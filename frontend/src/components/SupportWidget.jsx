@@ -1,3 +1,4 @@
+import { errorDetail } from '../lib/booking'
 import { useState, useEffect, useRef } from 'react'
 import { createSupportTicket, mySupportTickets, getSupportMessages, sendSupportMessage } from '../lib/api'
 import { useApp } from '../context/AppContext'
@@ -25,7 +26,7 @@ export default function SupportWidget({ onClose }) {
     }
   }, [active?.id])
 
-  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior:'smooth' }) }, [messages])
+  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }) }, [messages])
 
   async function submitTicket(e) {
     e.preventDefault(); setBusy(true)
@@ -34,7 +35,7 @@ export default function SupportWidget({ onClose }) {
       setTickets(t => [res.data, ...t])
       setActive(res.data); setMessages([]); setView('chat')
       addToast('Support ticket created!')
-    } catch { addToast('Failed to create ticket', 'error') }
+    } catch (ex) { addToast(errorDetail(ex, 'Failed to create ticket'), 'error') }
     finally { setBusy(false) }
   }
 
@@ -44,11 +45,11 @@ export default function SupportWidget({ onClose }) {
     try {
       const res = await sendSupportMessage(active.id, msg.trim())
       setMessages(m => [...m, res.data]); setMsg('')
-    } catch { addToast('Failed to send message', 'error') }
+    } catch (ex) { addToast(errorDetail(ex, 'Failed to send message'), 'error') }
     finally { setBusy(false) }
   }
 
-  const statusColor = { open:'#22C55E', in_progress:'#F59E0B', resolved:'#3B82F6', closed:'#6B7280' }
+  const statusColor = { open:'#166534', in_progress:'#92400E', resolved:'#1E40AF', closed:'#6B7280' }
 
   return (
     <div className={styles.widget}>
@@ -57,7 +58,7 @@ export default function SupportWidget({ onClose }) {
           <span className={styles.logo}>💬</span>
           <div>
             <p className={styles.headerTitle}>Jtickets Support</p>
-            <p className={styles.headerSub}>We typically reply within a few hours</p>
+            <p className={styles.headerSub}>Questions about your booking? Send us a message.</p>
           </div>
         </div>
         <button className={styles.close} onClick={onClose}>✕</button>

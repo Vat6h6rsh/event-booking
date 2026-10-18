@@ -68,3 +68,7 @@
   .inner { grid-template-columns: 1fr; }
   .bottom { flex-direction: column; gap: 8px; text-align: center; }
 }
+
+.footer { color: #E7E5F2; }
+.link, .bottom, .brand p { opacity: 1; }
+.logo { -webkit-text-fill-color: white; color: white; }

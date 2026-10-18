@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AppProvider, useApp, PAGES } from './context/AppContext'
+import { errorDetail } from './lib/booking'
+import MyBookings from './components/MyBookings'
 import { getEvents } from './lib/api'
 import Navbar              from './components/Navbar'
 import Hero                from './components/Hero'
@@ -32,26 +34,42 @@ function LegalPage({ type }) {
 function AppInner() {
   const {
     authOpen, bookingEvent, setEvents, setEventsLoading,
-    page, goHome, user, PAGES,
+    page, goHome, user, PAGES, setEventsError, catalogueVersion,
   } = useApp()
   const [supportOpen, setSupportOpen] = useState(false)
 
   useEffect(() => {
-    getEvents()
-      .then((r) => setEvents(r.data))
-      .catch(console.error)
-      .finally(() => setEventsLoading(false))
-  }, [])
+    let ignore = false
+    setEventsLoading(true); setEventsError('')
+    async function load() {
+      const all = []
+      for (let offset = 0; ; offset += 100) {
+        const { data } = await getEvents({ limit: 100, skip: offset })
+        if (ignore) return
+        all.push(...data)
+        if (data.length < 100) break
+      }
+      if (!ignore) setEvents(all)
+    }
+    load().catch(ex => { if (!ignore) setEventsError(errorDetail(ex, 'Could not refresh events. Retry to load the catalogue.')) })
+      .finally(() => { if (!ignore) setEventsLoading(false) })
+    return () => { ignore = true }
+  }, [catalogueVersion])
+  useEffect(() => {
+    document.title = `${({ home: 'Discover events', bookings: 'My tickets', event: 'Event details', organizer: 'Organizer dashboard', terms: 'Terms', privacy: 'Privacy', venue: 'Venue', support: 'Support' })[page] || 'JTickets'} | JTickets`
+    document.getElementById('main-content')?.focus({ preventScroll: true })
+  }, [page])
 
   function scrollToEvents() {
-    document.getElementById('events')?.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById('events')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
   }
 
   return (
     <>
       <Navbar onExplore={scrollToEvents} />
 
-      <main>
+      <a className="skip-link" href="#main-content">Skip to content</a>
+      <main id="main-content" tabIndex={-1}>
         {page === PAGES.HOME && (
           <>
             <Hero onExplore={scrollToEvents} />
@@ -59,26 +77,27 @@ function AppInner() {
             <EventsSection />
           </>
         )}
+        {page === PAGES.BOOKINGS && <MyBookings />}
         {page === PAGES.EVENT      && <EventDetail />}
         {page === PAGES.ORGANIZER  && <OrganizerDashboard />}
         {page === PAGES.TERMS      && <LegalPage type="terms" />}
         {page === PAGES.PRIVACY    && <LegalPage type="privacy" />}
       </main>
 
-      <Footer onSupport={() => setSupportOpen(true)} />
+      <div className={page === PAGES.EVENT ? styles.eventFooter : undefined}><Footer onSupport={() => setSupportOpen(true)} /></div>
 
       {authOpen      && <AuthModal />}
-      {bookingEvent  && <BookingModal />}
+      {bookingEvent  && <BookingModal key={bookingEvent.id} />}
       <Toast />
 
       {/* Floating support button */}
-      <button
+      {!bookingEvent && page !== PAGES.EVENT && <button
         className={styles.supportFab}
         onClick={() => setSupportOpen(s => !s)}
         title="Chat with Support"
       >
         {supportOpen ? '✕' : '💬'}
-      </button>
+      </button>}
 
       {supportOpen && <SupportWidget onClose={() => setSupportOpen(false)} />}
     </>

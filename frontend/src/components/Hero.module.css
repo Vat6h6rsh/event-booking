@@ -133,3 +133,6 @@
   .imgGrid { grid-template-columns: 1fr 1fr; gap: 10px; }
   .imgShifted { transform: none; }
 }
+
+.eyebrow { color: var(--red-dark); }
+.gradientWord { background-image: linear-gradient(135deg, #A80E22, #6435BB); }

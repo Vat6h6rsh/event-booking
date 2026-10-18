@@ -41,3 +41,5 @@
 
 @media (max-width: 768px) { .grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } }
 @media (min-width: 769px) and (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+
+.num { color: #5B21B6; }

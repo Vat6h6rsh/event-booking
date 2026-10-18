@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback } from 'react'
+import { createContext, useContext, useState, useCallback, useRef } from 'react'
 import { login as apiLogin, signup as apiSignup } from '../lib/api'
 
 const AppContext = createContext(null)
@@ -15,9 +15,16 @@ export function AppProvider({ children }) {
     try { return JSON.parse(localStorage.getItem('jtickets_user') || 'null') }
     catch { return null }
   })
+  const bookingIntents = useRef(new Map())
+  const pendingBooking = useRef(null)
+  const homeScroll = useRef(0)
+  const [filters, setFilters] = useState({ q: '', city: '', date: 'all' })
+  const [eventsError, setEventsError] = useState('')
+  const [catalogueVersion, setCatalogueVersion] = useState(0)
   const [events, setEvents]               = useState([])
   const [eventsLoading, setEventsLoading] = useState(true)
   const [authOpen, setAuthOpen]           = useState(false)
+  const [authTab, setAuthTab]             = useState('login')
   const [bookingEvent, setBookingEvent]   = useState(null)
   const [toasts, setToasts]               = useState([])
   const [category, setCategory]           = useState('all')
@@ -36,6 +43,7 @@ export function AppProvider({ children }) {
     localStorage.setItem('jtickets_token', access_token)
     localStorage.setItem('jtickets_user', JSON.stringify(u))
     setUser(u)
+    if (pendingBooking.current && u.role === 'customer') { setBookingEvent(pendingBooking.current); pendingBooking.current = null }
     return u
   }, [])
 
@@ -47,33 +55,38 @@ export function AppProvider({ children }) {
   const logout = useCallback(() => {
     localStorage.removeItem('jtickets_token')
     localStorage.removeItem('jtickets_user')
+    bookingIntents.current.clear()
+    pendingBooking.current = null
+    setBookingEvent(null)
     setUser(null)
     setPage(PAGES.HOME)
     addToast('Logged out. See you soon!')
   }, [addToast])
 
   const openBooking = useCallback((event) => {
-    if (!user) { setAuthOpen(true); return }
+    if (!user) { pendingBooking.current = event; setAuthTab('login'); setAuthOpen(true); return }
     if (user.role !== 'customer') { addToast('Only customers can book tickets.', 'error'); return }
     setBookingEvent(event)
   }, [user, addToast])
 
   const goToEvent = useCallback((event) => {
+    homeScroll.current = window.scrollY
     setSelectedEvent(event)
     setPage(PAGES.EVENT)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }, [])
 
   const goHome = useCallback(() => {
     setPage(PAGES.HOME)
     setSelectedEvent(null)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    requestAnimationFrame(() => window.scrollTo({ top: homeScroll.current, behavior: 'instant' }))
   }, [])
 
   return (
     <AppContext.Provider value={{
+      bookingIntents, filters, setFilters, eventsError, setEventsError, catalogueVersion, setCatalogueVersion,
       user, events, setEvents, eventsLoading, setEventsLoading,
-      authOpen, setAuthOpen,
+      authOpen, setAuthOpen, authTab, setAuthTab,
       bookingEvent, setBookingEvent,
       toasts, addToast,
       category, setCategory,

@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
+  timeout: 60000,
 })
 
 api.interceptors.request.use((config) => {
@@ -25,6 +26,7 @@ export const updateMe   = (d)   => api.put('/users/me', d)
 export const getEvents  = (params = {}) => api.get('/events', { params })
 export const getEvent   = (id)  => api.get(`/events/${id}`)
 export const getMyEvents= ()    => api.get('/events/mine')
+export const getMyEventStats = () => api.get('/events/mine/stats')
 export const createEvent= (d)   => api.post('/events', d)
 export const updateEvent= (id,d)=> api.put(`/events/${id}`, d)
 export const deleteEvent= (id)  => api.delete(`/events/${id}`)
@@ -39,13 +41,13 @@ export const deleteTier = (eid,tid)  => api.delete(`/events/${eid}/tiers/${tid}`
 export const getSeatAvailability = (eid) => api.get(`/events/${eid}/seats`)
 
 // Bookings
-export const createBooking = (d)  => api.post('/bookings', d)
+export const createBooking = (d, key) => api.post('/bookings', d, { headers: { 'Idempotency-Key': key } })
 export const myBookings    = ()   => api.get('/bookings')
 export const getBooking    = (id) => api.get(`/bookings/${id}`)
 export const cancelBooking = (id) => api.delete(`/bookings/${id}`)
 
 // Venues
-export const getVenues    = ()    => api.get('/venues')
+export const getVenues    = (params = {}) => api.get('/venues', { params })
 export const getMyVenues  = ()    => api.get('/venues/mine')
 export const createVenue  = (d)   => api.post('/venues', d)
 export const updateVenue  = (id,d)=> api.put(`/venues/${id}`, d)

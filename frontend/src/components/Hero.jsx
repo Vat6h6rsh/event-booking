@@ -4,10 +4,10 @@ import { useApp } from '../context/AppContext'
 import styles from './Hero.module.css'
 
 const HERO_IMGS = [
-  'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=400&h=300&q=80',
-  'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=400&h=300&q=80',
-  'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=400&h=300&q=80',
-  'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=400&h=300&q=80',
+  '/images/events/music-01.jpg',
+  '/images/events/music-06.jpg',
+  '/images/events/movies-01.jpg',
+  '/images/events/food-01.jpg',
 ]
 
 export default function Hero({ onExplore }) {
@@ -16,6 +16,7 @@ export default function Hero({ onExplore }) {
   const tlRef   = useRef(null)
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const ctx = gsap.context(() => {
       tlRef.current = gsap.timeline({ defaults: { ease: 'power3.out' } })
         .from('.hero-eyebrow', { y: 24, opacity: 0, duration: 0.6 })
@@ -32,7 +33,7 @@ export default function Hero({ onExplore }) {
   return (
     <section ref={heroRef} className={styles.hero}>
       {/* Decorative blobs */}
-      <div className={`blob blob-pink ${styles.blob1}`} />
+      <div className={`blob blob-red ${styles.blob1}`} />
       <div className={`blob blob-purple ${styles.blob2}`} />
       <div className={`blob blob-yellow ${styles.blob3}`} />
 
@@ -56,7 +57,7 @@ export default function Hero({ onExplore }) {
 
           <p className={`hero-sub ${styles.subtitle}`}>
             Discover concerts, movie nights, festivals &amp; get-togethers near you.
-            Book in seconds, memories forever.
+            Choose your tickets and review the details before confirming.
           </p>
 
           <div className={`hero-ctas ${styles.ctas}`}>
@@ -70,18 +71,7 @@ export default function Hero({ onExplore }) {
             )}
           </div>
 
-          <div className={styles.stats}>
-            {[
-              { num: '1,200+', label: 'Events' },
-              { num: '50K+',  label: 'Happy fans' },
-              { num: '80+',   label: 'Cities' },
-            ].map(({ num, label }) => (
-              <div key={label} className={`hero-stats ${styles.stat}`}>
-                <strong>{num}</strong>
-                <span>{label}</span>
-              </div>
-            ))}
-          </div>
+          <p className={styles.subtitle}>Demo booking experience · No payment collected. Find confirmed tickets in My tickets.</p>
         </div>
 
         {/* ── Right col: image grid ── */}

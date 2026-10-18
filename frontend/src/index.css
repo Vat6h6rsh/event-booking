@@ -2,10 +2,10 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --pink:        #FF6B9D;
-  --pink-light:  #FFB3D0;
-  --pink-pale:   #FFF0F6;
-  --purple:      #A78BFA;
+  --pink:        #FF3B5C;
+  --pink-light:  #FF9BAE;
+  --pink-pale:   #FFEEF0;
+  --purple:      #8B5CF6;
   --purple-light:#DDD6FE;
   --yellow:      #FCD34D;
   --yellow-light:#FEF3C7;
@@ -13,23 +13,32 @@
   --mint-light:  #D1FAE5;
   --peach:       #FDBA74;
   --sky:         #7DD3FC;
-  --coral:       #FF8C69;
+  --coral:       #FF5A3C;
+  --red:         #E0122B;
+  --red-dark:    #A80E22;
+  --red-pale:    #FFEBEC;
   --white:       #FFFFFF;
-  --offwhite:    #FDFBFF;
+  --offwhite:    #FFFAF9;
   --dark:        #1E1B4B;
   --dark-soft:   #312E81;
   --text:        #374151;
-  --muted:       #9CA3AF;
-  --border:      rgba(167,139,250,.2);
-  --shadow-sm:   0 2px 12px rgba(167,139,250,.15);
-  --shadow-md:   0 8px 32px rgba(167,139,250,.2);
-  --shadow-lg:   0 16px 56px rgba(167,139,250,.25);
+  --muted:       #5B6472;
+  --border:      rgba(224,18,43,.16);
+  --shadow-sm:   0 2px 12px rgba(224,18,43,.12);
+  --shadow-md:   0 8px 32px rgba(224,18,43,.16);
+  --shadow-lg:   0 16px 56px rgba(224,18,43,.22);
   --radius-sm:   8px;
   --radius-md:   16px;
   --radius-lg:   24px;
   --radius-pill: 9999px;
-  --font-logo:   'Pacifico', cursive;
-  --font-body:   'Nunito', sans-serif;
+  --font-logo:   'Bricolage Grotesque', cursive;
+  --font-heading:'Space Grotesk', sans-serif;
+  --font-body:   'Sora', sans-serif;
+
+  /* Generic aliases some components theme against directly. */
+  --primary:  var(--red);
+  --surface:  var(--offwhite);
+  --card-bg:  var(--white);
 }
 
 html { scroll-behavior: smooth; }
@@ -45,6 +54,7 @@ body {
 img { display: block; max-width: 100%; }
 button { cursor: pointer; font-family: var(--font-body); }
 a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
 
 /* ─── Utilities ──────────────────────────────────────────────────────── */
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
@@ -71,11 +81,11 @@ a { color: inherit; text-decoration: none; }
 .btn:active { transform: translateY(0); }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 100%);
+  background: var(--primary);
   color: #fff;
-  box-shadow: 0 4px 18px rgba(255,107,157,.4);
+  box-shadow: 0 4px 18px rgba(224,18,43,.4);
 }
-.btn-primary:hover { box-shadow: 0 8px 28px rgba(255,107,157,.55); }
+.btn-primary:hover { box-shadow: 0 8px 28px rgba(224,18,43,.55); }
 
 .btn-secondary {
   background: rgba(255,255,255,.85);
@@ -97,16 +107,30 @@ a { color: inherit; text-decoration: none; }
 
 /* ─── Cards ──────────────────────────────────────────────────────────── */
 .card {
+  position: relative;
+  isolation: isolate;
   background: var(--white);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   transition: transform .3s, box-shadow .3s;
 }
+.card::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  z-index: -1;
+  border-radius: inherit;
+  background: conic-gradient(from 180deg, var(--red), var(--pink), var(--purple), var(--yellow), var(--mint), var(--coral), var(--red));
+  opacity: 0;
+  filter: blur(6px);
+  transition: opacity .35s;
+}
 .card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-lg);
 }
+.card:hover::before { opacity: .85; }
 
 /* ─── Badges ─────────────────────────────────────────────────────────── */
 .badge {
@@ -119,10 +143,17 @@ a { color: inherit; text-decoration: none; }
   font-weight: 700;
   letter-spacing: .02em;
 }
-.badge-music   { background: rgba(255,107,157,.18); color: var(--pink); }
-.badge-movies  { background: rgba(167,139,250,.18); color: var(--purple); }
-.badge-social  { background: rgba(253,186,116,.25); color: #C2410C; }
-.badge-other   { background: rgba(110,231,183,.2);  color: #065F46; }
+.badge-music    { background: rgba(224,18,43,.14);   color: var(--red); }
+.badge-movies   { background: rgba(139,92,246,.18);  color: var(--purple); }
+.badge-social   { background: rgba(253,186,116,.25); color: #C2410C; }
+.badge-festival { background: rgba(255,90,60,.18);   color: #C2410C; }
+.badge-sports   { background: rgba(34,197,94,.16);   color: #15803D; }
+.badge-food     { background: rgba(252,211,77,.28);  color: #92400E; }
+.badge-tech     { background: rgba(125,211,252,.24); color: #0369A1; }
+.badge-art      { background: rgba(221,214,254,.5);  color: #5B21B6; }
+.badge-wellness { background: rgba(110,231,183,.22); color: #065F46; }
+.badge-comedy   { background: rgba(255,59,92,.16);   color: var(--pink); }
+.badge-other    { background: rgba(110,231,183,.2);  color: #065F46; }
 
 /* ─── Section layout ─────────────────────────────────────────────────── */
 .section { padding: 80px 0; }
@@ -179,8 +210,8 @@ a { color: inherit; text-decoration: none; }
   outline: none;
 }
 .input:focus {
-  border-color: var(--purple);
-  box-shadow: 0 0 0 4px rgba(167,139,250,.15);
+  border-color: var(--red);
+  box-shadow: 0 0 0 4px rgba(224,18,43,.14);
 }
 .input::placeholder { color: var(--muted); }
 
@@ -200,8 +231,9 @@ a { color: inherit; text-decoration: none; }
   pointer-events: none;
   z-index: 0;
 }
-.blob-pink  { background: rgba(255,107,157,.25); }
-.blob-purple{ background: rgba(167,139,250,.25); }
+.blob-pink  { background: rgba(255,59,92,.25); }
+.blob-red   { background: rgba(224,18,43,.22); }
+.blob-purple{ background: rgba(139,92,246,.25); }
 .blob-yellow{ background: rgba(252,211,77, .2);  }
 .blob-mint  { background: rgba(110,231,183,.2);  }
 
@@ -211,9 +243,9 @@ a { color: inherit; text-decoration: none; }
   33%      { transform: translateY(-12px) rotate(4deg); }
   66%      { transform: translateY(6px) rotate(-3deg); }
 }
-.float { animation: float 6s ease-in-out infinite; }
-.float-slow { animation: float 9s ease-in-out infinite; }
-.float-fast { animation: float 4s ease-in-out infinite; }
+.float { animation: float 4s ease-in-out 1; }
+.float-slow { animation: float 5s ease-in-out 1; }
+.float-fast { animation: float 3s ease-in-out 1; }
 
 /* ─── Spinner ────────────────────────────────────────────────────────── */
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -276,3 +308,35 @@ a { color: inherit; text-decoration: none; }
 @media (min-width: 769px) {
   .hide-desktop { display: none !important; }
 }
+
+/* Interaction and text contrast are independent of the decorative candy palette. */
+:root { --ink-accent: #A80E22; }
+:focus-visible { outline: 3px solid #4338CA; outline-offset: 4px; }
+:where(button, input, select, textarea, a, [tabindex]) { scroll-margin-top: 110px; scroll-margin-bottom: 110px; }
+button:disabled { cursor: not-allowed; }
+fieldset { min-width: 0; border: 0; padding: 0; }
+legend { font-weight: 700; margin-bottom: 8px; }
+dialog { color: var(--text); border: 0; position: fixed; inset: 0; margin: auto; }
+dialog::backdrop { background: rgba(30,27,75,.65); backdrop-filter: blur(4px); }
+dialog:not([open]) { display: none; }
+.skeleton { min-height: 24px; margin: 12px 0; background: #E9E4EC; border-radius: 12px; }
+.skip-link { position: fixed; top: -100px; left: 16px; background: white; color: var(--dark); padding: 12px; z-index: 5000; }
+.skip-link:focus { top: 16px; }
+.btn-primary { background: var(--primary); }
+.btn-ghost:hover, .section-eyebrow { color: var(--ink-accent); }
+.gradient-text, .section-title span { background-image: linear-gradient(135deg, #A80E22, #6435BB); }
+.badge-movies { color: #5B21B6; }
+.badge-comedy { color: #9F1239; }
+.badge-sports { color: #11602B; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  html { scroll-behavior: auto; }
+}
+
+.badge { background: #fff; }
+.badge-music, .badge-comedy { background: #FFE4E6; color: #9F1239; }
+.badge-movies, .badge-art { background: #EDE9FE; color: #5B21B6; }
+.badge-social, .badge-festival { background: #FFEDD5; color: #9A3412; }
+.badge-sports, .badge-wellness, .badge-other { background: #D1FAE5; color: #065F46; }
+.badge-food { background: #FEF3C7; color: #92400E; }
+.badge-tech { background: #E0F2FE; color: #075985; }

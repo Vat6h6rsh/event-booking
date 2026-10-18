@@ -1,3 +1,4 @@
+import { errorDetail } from '../lib/booking'
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { useApp } from '../context/AppContext'
 import { getNotifications, markNotificationRead, markAllNotificationsRead } from '../lib/api'
@@ -19,13 +20,20 @@ export default function NotificationBell() {
   const { user } = useApp()
   const [items, setItems] = useState([])
   const [open, setOpen] = useState(false)
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [updated, setUpdated] = useState(null)
+  const loadingRef = useRef(false)
   const wrapRef = useRef(null)
 
   const load = useCallback(async () => {
+    if (document.hidden || loadingRef.current) return
+    loadingRef.current = true
     try {
       const { data } = await getNotifications()
-      setItems(data)
-    } catch { /* not logged in / transient — ignore */ }
+      setItems(data); setError(''); setUpdated(new Date())
+    } catch (ex) { setError(errorDetail(ex, 'Could not refresh notifications. Previously loaded items may be out of date.')) }
+    finally { setLoading(false); loadingRef.current = false }
   }, [])
 
   // Poll while logged in.
@@ -33,15 +41,19 @@ export default function NotificationBell() {
     if (!user) { setItems([]); return }
     load()
     const t = setInterval(load, POLL_MS)
-    return () => clearInterval(t)
+    const visible = () => { if (!document.hidden) load() }
+    document.addEventListener('visibilitychange', visible)
+    return () => { clearInterval(t); document.removeEventListener('visibilitychange', visible) }
   }, [user, load])
 
   // Close on outside click.
   useEffect(() => {
     if (!open) return
     const onClick = (e) => { if (wrapRef.current && !wrapRef.current.contains(e.target)) setOpen(false) }
+    const escape = e => { if (e.key === 'Escape') { setOpen(false); wrapRef.current?.querySelector('button')?.focus() } }
+    document.addEventListener('keydown', escape)
     document.addEventListener('mousedown', onClick)
-    return () => document.removeEventListener('mousedown', onClick)
+    return () => { document.removeEventListener('mousedown', onClick); document.removeEventListener('keydown', escape) }
   }, [open])
 
   if (!user) return null
@@ -64,6 +76,7 @@ export default function NotificationBell() {
       <button
         className={styles.bell}
         aria-label={`Notifications${unread ? ` (${unread} unread)` : ''}`}
+        aria-expanded={open} aria-controls="notification-panel"
         onClick={() => setOpen((o) => !o)}
       >
         🔔
@@ -71,7 +84,7 @@ export default function NotificationBell() {
       </button>
 
       {open && (
-        <div className={styles.panel}>
+        <div id="notification-panel" className={styles.panel} aria-label="Notifications">
           <div className={styles.head}>
             <span>Notifications</span>
             {unread > 0 && (
@@ -79,13 +92,15 @@ export default function NotificationBell() {
             )}
           </div>
 
-          {items.length === 0 ? (
+          {updated && <p className={styles.refresh}>Last refreshed {updated.toLocaleTimeString('en-IN')}</p>}
+          {error && <div role="alert" className={styles.refresh}><p>{error}</p><button className="btn btn-secondary btn-sm" onClick={load}>Retry notifications</button></div>}
+          {loading ? <p role="status" className={styles.empty}>Loading notifications...</p> : !error && items.length === 0 ? (
             <div className={styles.empty}>You're all caught up ✨</div>
           ) : (
             <ul className={styles.list}>
               {items.map((n) => (
-                <li
-                  key={n.id}
+                <li key={n.id}><button type="button"
+                  aria-label={`${n.is_read ? 'Read' : 'Unread - mark as read'}: ${n.message}`}
                   className={`${styles.item} ${n.is_read ? '' : styles.unreadItem}`}
                   onClick={() => openOne(n)}
                 >
@@ -95,7 +110,7 @@ export default function NotificationBell() {
                     <span className={styles.time}>{timeAgo(n.created_at)}</span>
                   </div>
                   {!n.is_read && <span className={styles.dot} />}
-                </li>
+                </button></li>
               ))}
             </ul>
           )}

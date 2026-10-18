@@ -2,7 +2,7 @@ import { useApp, PAGES } from '../context/AppContext'
 import styles from './Footer.module.css'
 
 export default function Footer({ onSupport }) {
-  const { setPage, goHome } = useApp()
+  const { setPage, goHome, setCategory, user, setAuthOpen } = useApp()
 
   return (
     <footer className={styles.footer}>
@@ -21,15 +21,15 @@ export default function Footer({ onSupport }) {
         {/* Explore */}
         <div className={styles.col}>
           <h4 className={styles.colTitle}>Explore</h4>
-          {['Music', 'Movies', 'Social', 'Festival'].map(c => (
-            <button key={c} className={styles.link} onClick={goHome}>{c} Events</button>
+          {['Music', 'Movies', 'Festival', 'Sports', 'Food', 'Comedy'].map(c => (
+            <button key={c} className={styles.link} onClick={() => { setCategory(c); goHome() }}>{c} Events</button>
           ))}
         </div>
 
         {/* Company */}
         <div className={styles.col}>
           <h4 className={styles.colTitle}>Platform</h4>
-          <button className={styles.link} onClick={() => setPage(PAGES.ORGANIZER)}>Organizer Dashboard</button>
+          <button className={styles.link} onClick={() => user?.role === 'organizer' ? setPage(PAGES.ORGANIZER) : setAuthOpen(true)}>Organizer Dashboard</button>
           <button className={styles.link} onClick={onSupport}>Chat with Us</button>
         </div>
 

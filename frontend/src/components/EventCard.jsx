@@ -1,43 +1,47 @@
+import { formatMoney } from '../lib/money'
+import { inventory, formatDate, eventDate, eventCity } from '../lib/booking'
 import styles from './EventCard.module.css'
 import { useApp } from '../context/AppContext'
 
 const FALLBACK = {
-  Music:   'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=600&h=380&q=80',
-  Movies:  'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&h=380&q=80',
-  Social:  'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=600&h=380&q=80',
-  Festival:'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=600&h=380&q=80',
-  default: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=600&h=380&q=80',
+  Music:    '/images/events/music-01.jpg',
+  Movies:   '/images/events/movies-01.jpg',
+  Social:   '/images/events/food-01.jpg',
+  Festival: '/images/events/festival-01.jpg',
+  Sports:   '/images/events/sports-01.jpg',
+  Food:     '/images/events/food-04.jpg',
+  Tech:     '/images/events/tech-01.jpg',
+  Art:      '/images/events/art-01.jpg',
+  Wellness: '/images/events/wellness-01.jpg',
+  Comedy:   '/images/events/comedy-01.jpg',
+  default:  '/images/events/music-06.jpg',
 }
-const CAT_BADGE = { Music:'badge-music', Movies:'badge-movies', Social:'badge-social', Festival:'badge-other' }
+const CAT_BADGE = {
+  Music:'badge-music', Movies:'badge-movies', Social:'badge-social', Festival:'badge-festival',
+  Sports:'badge-sports', Food:'badge-food', Tech:'badge-tech', Art:'badge-art',
+  Wellness:'badge-wellness', Comedy:'badge-comedy',
+}
 const AGE_COLOR = { 'U':'#22C55E','UA':'#F59E0B','A':'#EF4444','18+':'#DC2626' }
 
 function timeColor(isoDate) {
-  const h = new Date(isoDate).getHours()
+  const h = Number(eventDate(isoDate).toLocaleString('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit' }))
   if (h < 12) return { bg: '#EFF6FF', color: '#1D4ED8', label: 'Morning' }
   if (h < 17) return { bg: '#FFFBEB', color: '#B45309', label: 'Afternoon' }
   if (h < 21) return { bg: '#F5F3FF', color: '#6D28D9', label: 'Evening' }
   return { bg: '#1E1B4B', color: '#C4B5FD', label: 'Night' }
 }
 
-function lowestTierPrice(tiers) {
-  if (!tiers?.length) return null
-  return Math.min(...tiers.map(t => t.price))
-}
-
 export default function EventCard({ event }) {
   const { openBooking, goToEvent } = useApp()
   const img      = event.image_url || FALLBACK[event.category] || FALLBACK.default
-  const sold     = event.available_tickets === 0
-  const lowStock = !sold && event.available_tickets <= 15
+  const stock = inventory(event)
+  const sold = stock.sold || eventDate(event.event_date) <= new Date()
+  const lowStock = !sold && stock.available <= 15
   const tc       = timeColor(event.event_date)
-  const minPrice = lowestTierPrice(event.tiers)
-  const displayPrice = minPrice ?? event.price
+  const displayPrice = stock.price
 
   function fmtPrice(p) {
-    return p ? `from ₹${p.toLocaleString('en-IN')}` : 'Free'
-  }
-  function fmtDate(iso) {
-    return new Date(iso).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' })
+    return sold ? 'Unavailable' : `From ${formatMoney(p)}`
   }
 
   return (
@@ -57,28 +61,28 @@ export default function EventCard({ event }) {
 
         {/* Screening time */}
         <span className={styles.timeBadge} style={{ background: tc.bg, color: tc.color }}>
-          {new Date(event.event_date).toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit', hour12:true })}
+          {eventDate(event.event_date).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour:'2-digit', minute:'2-digit', hour12:true })} IST
         </span>
 
         {sold && <span className={styles.soldBadge}>Sold Out</span>}
         {lowStock && !sold && (
-          <span className={styles.lowBadge}>Only {event.available_tickets} left!</span>
+          <span className={styles.lowBadge}>{stock.available} available</span>
         )}
       </div>
 
       <div className={styles.body}>
-        <h3 className={styles.name}>{event.name}</h3>
+        <h3 className={styles.name}><button className={styles.detailLink} onClick={e => { e.stopPropagation(); goToEvent(event) }}>{event.name}<span className="visually-hidden"> — view event details</span></button></h3>
 
         <div className={styles.meta}>
-          <span>📍 {event.venue}</span>
-          <span>📅 {fmtDate(event.event_date)}</span>
+          <span>📍 {event.venue}{(event._city || eventCity(event)) && ` · ${event._city || eventCity(event)}`}</span>
+          <span>📅 {formatDate(event.event_date)}</span>
         </div>
 
         {/* Tier pills */}
         {event.tiers?.length > 0 && (
           <div className={styles.tiers}>
             {event.tiers.slice(0, 3).map(t => (
-              <span key={t.id} className={styles.tierPill} style={{ background: t.color + '22', color: t.color, borderColor: t.color + '55' }}>
+              <span key={t.id} className={styles.tierPill} style={{ background: t.color + '22', color: 'var(--dark)', borderColor: t.color + '55' }}>
                 {t.name}
               </span>
             ))}
@@ -88,7 +92,7 @@ export default function EventCard({ event }) {
         <div className={styles.footer}>
           <div className={styles.priceWrap}>
             <span className={styles.price}>{fmtPrice(displayPrice)}</span>
-            <span className={styles.tickets}>{sold ? '— Sold out' : `🎟️ ${event.available_tickets} left`}</span>
+            <span className={styles.tickets}>{sold ? '— Sold out' : `🎟️ ${stock.available} available`}</span>
           </div>
           <button
             className={`btn btn-primary btn-sm ${sold ? styles.soldBtn : ''}`}

@@ -89,3 +89,12 @@
   flex-shrink: 0;
   margin-top: 6px;
 }
+
+.item { width: 100%; text-align: left; border: 0; background: white; color: var(--text); }
+.unreadItem { background: var(--pink-pale); }
+.refresh { padding: 12px 16px; font-size: .8rem; }
+.bell { min-width: 44px; min-height: 44px; }
+.badge { background: #A80E22; }
+.markAll { color: #5B21B6; }
+.panel { max-height: 75dvh; overflow-y: auto; }
+@media (max-width:768px) { .panel { position: fixed; top: 76px; right: 12px; width: min(340px, calc(100vw - 24px)); max-width: none; } }

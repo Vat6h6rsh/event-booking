@@ -1,0 +1,8 @@
+.receipt { padding: 24px; border: 2px solid var(--border); border-top: 5px solid var(--red); border-radius: var(--radius-md); background: white; display: grid; gap: 12px; overflow-wrap: anywhere; }
+.receipt h3 { color: var(--dark); font-size: 1.25rem; }
+.facts { display: flex; flex-wrap: wrap; gap: 24px; }
+.facts dt { color: var(--muted); font-size: .8rem; }
+.facts dd { margin: 0; font-weight: 700; }
+.codes { list-style: none; display: grid; gap: 8px; }
+.codes li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px; background: var(--surface); border-radius: 8px; }
+.codes code { font-size: 1rem; font-weight: 700; }

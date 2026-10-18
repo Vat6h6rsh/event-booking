@@ -1,4 +1,4 @@
-.dash { max-width: 900px; margin: 0 auto; padding: 28px 20px 60px; }
+.dash { max-width: 900px; margin: 0 auto; padding: 108px 20px 60px; }
 .header { margin-bottom: 24px; }
 .title { font-size: 1.8rem; font-weight: 900; margin: 0 0 4px; }
 .sub { color: var(--muted); font-size: 0.9rem; }
@@ -53,3 +53,16 @@
 .statCard { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); padding: 24px 20px; display: flex; flex-direction: column; gap: 4px; text-align: center; }
 .statNum { font-size: 2rem; font-weight: 900; color: var(--primary); }
 @media (max-width: 600px) { .grid2, .grid3 { grid-template-columns: 1fr; } .evCard { flex-direction: column; } .evImg { width: 100%; height: 140px; } }
+
+.fields { display: grid; gap: 16px; }
+.error { padding: 16px; background: #fff1f2; color: #9f1239; }
+.recovery { border: 2px solid var(--red-dark); border-radius: 16px; padding: 24px; margin: 20px 0; display: grid; gap: 12px; }
+.recovery ul { padding-left: 20px; }
+.statNum { font-size: 1.4rem; }
+
+.pendingTier { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); margin: 12px 0; }
+
+.tabActive:hover { color: #fff; background: var(--primary); }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.sellThrough { display: grid; gap: 6px; font-size: .8rem; margin-top: 12px; }
+.sellThrough progress { width: 100%; height: 8px; accent-color: var(--primary); }

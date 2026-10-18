@@ -1,7 +1,7 @@
 .section { background: var(--white); }
 .grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 14px;
 }
 .card {
@@ -29,7 +29,7 @@
 .card:hover::before, .card.active::before { opacity: 1; }
 .card:hover, .card.active {
   transform: translateY(-4px);
-  box-shadow: 0 8px 28px rgba(167,139,250,.3);
+  box-shadow: 0 8px 28px rgba(224,18,43,.28);
 }
 .card.active { border-color: rgba(255,255,255,.6); }
 
@@ -59,3 +59,8 @@
 
 @media (max-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 480px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+
+.card:hover::before, .card.active::before { opacity: .18; }
+.card:hover .label, .card.active .label { color: var(--dark); }
+.card.active { border-color: var(--red-dark); }
+.tick { color: var(--red-dark); }

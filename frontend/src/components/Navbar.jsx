@@ -4,7 +4,7 @@ import NotificationBell from './NotificationBell'
 import styles from './Navbar.module.css'
 
 export default function Navbar({ onExplore }) {
-  const { user, logout, setAuthOpen, page, setPage, goHome } = useApp()
+  const { user, logout, setAuthOpen, setAuthTab, page, setPage, goHome } = useApp()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const navRef = useRef(null)
@@ -15,7 +15,7 @@ export default function Navbar({ onExplore }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  function nav(pg) { setPage(pg); setMenuOpen(false); window.scrollTo({ top:0, behavior:'smooth' }) }
+  function nav(pg) { setPage(pg); setMenuOpen(false); window.scrollTo({ top:0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }) }
 
   return (
     <nav ref={navRef} className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
@@ -30,18 +30,21 @@ export default function Navbar({ onExplore }) {
         <ul className={styles.links}>
           <li><button onClick={() => { goHome(); setTimeout(onExplore, 100) }}>Events</button></li>
           {user?.role === 'organizer' && (
-            <li><button onClick={() => nav(PAGES.ORGANIZER)}>Dashboard</button></li>
+            <li><button className={page === PAGES.ORGANIZER ? styles.linkActive : ''} onClick={() => nav(PAGES.ORGANIZER)}>Dashboard</button></li>
           )}
+          {user?.role === 'customer' && <li><button aria-current={page === PAGES.BOOKINGS ? 'page' : undefined} onClick={() => nav(PAGES.BOOKINGS)}>My tickets</button></li>}
         </ul>
 
+        {user && <NotificationBell />}
         {/* Auth area */}
         <div className={styles.auth}>
           {user ? (
             <>
-              <span className={styles.greeting}>
-                {user.role === 'organizer' ? '🎪' : '🌟'} {user.full_name || user.email.split('@')[0]}
-              </span>
-              <NotificationBell />
+              <div className={styles.userChip}>
+                <span className={styles.avatar}>{(user.full_name || user.email)[0].toUpperCase()}</span>
+                <span className={styles.greeting}>{user.full_name || user.email.split('@')[0]}</span>
+              </div>
+
               {user.role === 'organizer' && (
                 <button className="btn btn-ghost btn-sm" onClick={() => nav(PAGES.ORGANIZER)}>Dashboard</button>
               )}
@@ -49,21 +52,22 @@ export default function Navbar({ onExplore }) {
             </>
           ) : (
             <>
-              <button className="btn btn-ghost btn-sm" onClick={() => setAuthOpen(true)}>Log in</button>
-              <button className="btn btn-primary btn-sm" onClick={() => setAuthOpen(true)}>Sign up ✨</button>
+              <button className="btn btn-ghost btn-sm" onClick={() => { setAuthTab('login'); setAuthOpen(true) }}>Log in</button>
+              <button className="btn btn-primary btn-sm" onClick={() => { setAuthTab('signup'); setAuthOpen(true) }}>Sign up ✨</button>
             </>
           )}
         </div>
 
         {/* Hamburger */}
-        <button className={styles.hamburger} aria-label="Menu" onClick={() => setMenuOpen(!menuOpen)}>
+        <button className={styles.hamburger} aria-label="Menu" aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen(!menuOpen)}>
           <span /><span /><span />
         </button>
       </div>
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className={styles.mobileMenu}>
+        <div id="mobile-navigation" className={styles.mobileMenu}>
+          {user?.role === 'customer' && <button onClick={() => nav(PAGES.BOOKINGS)}>My tickets</button>}
           <button onClick={() => { goHome(); setMenuOpen(false); setTimeout(onExplore, 100) }}>Events</button>
           {user?.role === 'organizer' && (
             <button onClick={() => nav(PAGES.ORGANIZER)}>Dashboard</button>
@@ -72,8 +76,8 @@ export default function Navbar({ onExplore }) {
             <button className="btn btn-ghost" onClick={() => { logout(); setMenuOpen(false) }}>Log out</button>
           ) : (
             <>
-              <button className="btn btn-ghost" onClick={() => { setAuthOpen(true); setMenuOpen(false) }}>Log in</button>
-              <button className="btn btn-primary" onClick={() => { setAuthOpen(true); setMenuOpen(false) }}>Sign up ✨</button>
+              <button className="btn btn-ghost" onClick={() => { setAuthTab('login'); setAuthOpen(true); setMenuOpen(false) }}>Log in</button>
+              <button className="btn btn-primary" onClick={() => { setAuthTab('signup'); setAuthOpen(true); setMenuOpen(false) }}>Sign up ✨</button>
             </>
           )}
         </div>

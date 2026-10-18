@@ -107,3 +107,17 @@
 .confirmBtn { width: 100%; font-size: 1rem; padding: 14px; }
 .note { text-align: center; font-size: 0.75rem; color: var(--muted); }
 @media (max-width: 500px) { .row2 { grid-template-columns: 1fr; } .tierGrid { grid-template-columns: 1fr 1fr; } }
+
+.modal { margin: auto; max-height: 92dvh; }
+.fields { display: grid; gap: 20px; }
+.fields > fieldset { min-width: 0; }
+.tierCard { color: var(--dark); }
+.tierCard:has(input:checked) { outline: 3px solid var(--dark); outline-offset: 2px; }
+.tierPrice { color: var(--dark); }
+.priceBox { margin: 20px 0; }
+.priceLine { flex-wrap: wrap; gap: 8px; }
+.err a { text-decoration: underline; }
+.close { background: #1E1B4B; width: 44px; height: 44px; }
+.bannerCat { color: #fff; }
+.confirmBtn { justify-content: center; margin-top: 12px; white-space: normal; }
+@media (max-width: 600px) { .modal { width: 100%; max-width: none; max-height: 100dvh; height: 100dvh; border-radius: 0; } .body { padding: 20px 16px calc(24px + env(safe-area-inset-bottom)); } .banner { border-radius: 0; } .tierGrid { grid-template-columns: 1fr; } }

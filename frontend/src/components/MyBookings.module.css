@@ -1,0 +1,6 @@
+.page { max-width: 900px; margin: auto; padding: 108px 24px 80px; }
+.heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+.list { display: grid; gap: 24px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; padding: 16px; }
+.actions p { width: 100%; }
+.error { padding: 16px; background: #fff1f2; color: #9f1239; margin-bottom: 16px; }

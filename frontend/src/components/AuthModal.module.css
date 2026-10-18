@@ -110,3 +110,9 @@
 @media (max-width: 480px) {
   .modal { padding: 24px 20px; }
 }
+
+.modal { margin: auto; max-height: 92dvh; overflow-y: auto; }
+.fields { display: grid; gap: 16px; }
+.roleCard input { display: inline-block; }
+.logoSmall { background-image: linear-gradient(135deg, #A80E22, #6435BB); }
+.switch button { color: #5B21B6; }
