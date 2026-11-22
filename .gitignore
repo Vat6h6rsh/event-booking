@@ -16,6 +16,11 @@ dist/
 .DS_Store
 Thumbs.db
 
+# Markdown: only READMEs and the stress-test evidence that README.md links to ship
+*.md
+!README.md
+!loadtest/results/*.md
+
 # Internal docs & design assets (not for repo)
 DEPLOY.md
 SHOWCASE.md

@@ -1,8 +1,14 @@
 """End-to-end smoke test for the Event Booking API."""
-import httpx
+import os
 import sys
+import uuid
 
-BASE = "http://127.0.0.1:8000"
+import httpx
+
+BASE = os.environ.get("BASE_URL", "http://127.0.0.1:8000").rstrip("/")
+RUN = uuid.uuid4().hex[:8]  # unique emails so the script can be re-run against the same DB
+ORG_EMAIL = f"org-{RUN}@test.com"
+FAN_EMAIL = f"fan-{RUN}@test.com"
 
 
 def check(label: str, r: httpx.Response, expected: int) -> dict:
@@ -15,11 +21,11 @@ def check(label: str, r: httpx.Response, expected: int) -> dict:
 
 
 # 1. Signup organizer
-r = httpx.post(f"{BASE}/signup", json={"email": "org@test.com", "password": "secret123", "role": "organizer"})
+r = httpx.post(f"{BASE}/signup", json={"email": ORG_EMAIL, "password": "secret123", "role": "organizer"})
 check("Signup organizer", r, 201)
 
 # 2. Login organizer
-r = httpx.post(f"{BASE}/login", data={"username": "org@test.com", "password": "secret123"})
+r = httpx.post(f"{BASE}/login", data={"username": ORG_EMAIL, "password": "secret123"})
 data = check("Login organizer", r, 200)
 org_hdr = {"Authorization": f"Bearer {data['access_token']}"}
 
@@ -37,11 +43,11 @@ r = httpx.get(f"{BASE}/events")
 check("List events (no auth)", r, 200)
 
 # 5. Signup customer
-r = httpx.post(f"{BASE}/signup", json={"email": "fan@test.com", "password": "secret123", "role": "customer"})
+r = httpx.post(f"{BASE}/signup", json={"email": FAN_EMAIL, "password": "secret123", "role": "customer"})
 check("Signup customer", r, 201)
 
 # 6. Login customer
-r = httpx.post(f"{BASE}/login", data={"username": "fan@test.com", "password": "secret123"})
+r = httpx.post(f"{BASE}/login", data={"username": FAN_EMAIL, "password": "secret123"})
 data = check("Login customer", r, 200)
 cust_hdr = {"Authorization": f"Bearer {data['access_token']}"}
 
@@ -62,8 +68,8 @@ r = httpx.get(f"{BASE}/events/{event_id}")
 data = check("Event still 7 tickets left", r, 200)
 assert data["available_tickets"] == 7, f"Expected 7, got {data['available_tickets']}"
 
-# 10. Overbook -> 409
-r = httpx.post(f"{BASE}/bookings", json={"event_id": event_id, "quantity": 99}, headers=cust_hdr)
+# 10. Overbook -> 409 (8 > 7 remaining; quantity itself must stay within the 1-10 schema limit)
+r = httpx.post(f"{BASE}/bookings", json={"event_id": event_id, "quantity": 8}, headers=cust_hdr)
 check("Overbook (expect 409)", r, 409)
 
 # 11. Organizer updates event -> Background Task 2 fires notify log
