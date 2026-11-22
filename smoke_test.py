@@ -7,8 +7,8 @@ import httpx
 
 BASE = os.environ.get("BASE_URL", "http://127.0.0.1:8000").rstrip("/")
 RUN = uuid.uuid4().hex[:8]  # unique emails so the script can be re-run against the same DB
-ORG_EMAIL = f"org-{RUN}@test.com"
-FAN_EMAIL = f"fan-{RUN}@test.com"
+ORG_EMAIL = f"org-{RUN}@example.com"
+FAN_EMAIL = f"fan-{RUN}@example.com"
 
 
 def check(label: str, r: httpx.Response, expected: int) -> dict:
