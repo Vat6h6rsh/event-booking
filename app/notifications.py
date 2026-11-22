@@ -32,13 +32,12 @@ class EmailNotifier(Notifier):
         recipient = booking.user.email
         subject = f"Booking confirmation - {event.name}"
         total = f"{booking.total_price // 100}.{booking.total_price % 100:02d}"
-        html, text = email.template("Your booking is confirmed", [
-            f"Event: {event.name}", f"Date: {email.ist_date(event.event_date)}",
-            f"Venue: {event.venue}", f"Tier: {booking.tier.name if booking.tier else 'General'}",
-            f"Quantity: {booking.quantity}", f"Total: ₹{total}",
-            f"Booking ID: {booking.id}",
-            "Ticket codes: " + ", ".join(a.ticket_code for a in booking.attendees),
-        ])
+        html, text = email.ticket_template(
+            event=event.name, when=email.ist_date(event.event_date), venue=event.venue,
+            tier=booking.tier.name if booking.tier else "General", quantity=booking.quantity,
+            total=total, booking_id=booking.id,
+            attendees=[(a.full_name, a.seat_label, a.ticket_code) for a in booking.attendees],
+        )
         _persist(db, user_id=booking.user_id, event_id=event.id, job_id=job_id,
                  type="booking_confirmed", message=f"Your booking for '{event.name}' is confirmed.")
         email.send_email(recipient, subject, html, text)
